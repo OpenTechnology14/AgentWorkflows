@@ -4,6 +4,8 @@
 
 - Source/project/key/revision:
 - Kind: idea / reported bug / simple change / proposal remainder / review finding.
+- Opening insight: one or two sentences or a short list; keep original wording/source.
+- Closing idea conclusion: one or two sentences or a short list, with scope/limits and remaining choices.
 - Owner words or attributed source insight:
 - Expected/actual behavior and evidence classification:
 - Security/UI/other classification; impact/severity if defect:

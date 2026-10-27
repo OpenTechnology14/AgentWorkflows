@@ -2,6 +2,7 @@
 
 - Read README.md and the workflow relevant to the task. Target projects retain their own authority.
 - Keep this public library generic. Never add live portfolio records, private source archives, local paths, credentials or runtime identifiers. Examples are synthetic.
+- Idea conversations start and finish in one or two sentences or a short list; the facilitator helps refine them and fills intake.
 - The owner supplies insights and decisions; agents generate complete current-stage prompts and brief bulleted summaries. Preserve scope, holds and unanswered questions.
 - Edit workflows/, templates/ and packaging/; regenerate plugins/ and dist/ with `python3 scripts/build.py`. Do not hand-edit generated files.
 - CLAUDE.md is maintained; AGENTS.md is its exact generated copy.

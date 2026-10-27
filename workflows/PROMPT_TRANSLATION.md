@@ -3,6 +3,10 @@
 
 The owner supplies insights and decisions. The facilitator generates and maintains the AI instructions for each item as it moves through the work. Never require the owner to fill a template, choose a tool/model, copy a brief between agents, or say “turn this into a prompt” at each step. Technical interpretation, source gathering, canonical routing, task decomposition and prompt writing are agent work.
 
+## Short idea conversation → complete intake
+
+Start and finish exploration with one or two simple sentences or a short bulleted list. The facilitator helps generate/refine the idea, then expands that conclusion into the agent-filled intake and next prompt. Keep technical details behind links; do not ask the owner to complete a form. See [idea generation](IDEA_GENERATION.md).
+
 ## One intake, different kinds of work
 
 Capture feature ideas, bug reports, simple changes, audit findings, proposal remnants, review comments and acceptance failures from any **available, authorized** source: this conversation, a project coordinator, an existing issue/PR or project documents. “Anywhere” does not grant access to an unconnected app, start monitoring, or authorize sending private content elsewhere. If the project/source is ambiguous, keep an unassigned intake note and ask only what cannot be inferred.

@@ -18,6 +18,8 @@ Run the build. `dist/chatgpt/INSTRUCTIONS.md` is the concise instruction text, `
 
 Prefer the skill/plugin path where supported. OpenAI's [custom GPT migration guide](https://learn.chatgpt.com/docs/migrate-custom-gpts) describes workflows moving to skills/plugins; available legacy GPT surfaces vary. No custom actions, connectors or background jobs are included.
 
+For connected repositories, use the [direct-reference process](PROJECT_INTEGRATION.md) to pin accepted source and detect drift.
+
 ## First conversation
 
 “Use Agent Workflows to facilitate this project. I provide insights and decisions; you generate the prompts. Start by reviewing existing proposal work. Show short bullets and ask only the choices that need me.”

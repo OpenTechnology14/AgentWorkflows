@@ -2,6 +2,7 @@
 
 Open-source workflows that turn human insights and decisions into useful AI work.
 
+- **Start and finish ideas simply:** one or two sentences or a short list; the facilitator helps shape the idea and fills intake.
 - **You bring ideas and decisions.** The agent investigates, writes prompts and carries authorized work forward.
 - **One intake:** ideas, bugs, small changes, proposals, audits and review findings.
 - **Simple conclusions drive each next prompt.** No technical forms for the owner.
@@ -18,6 +19,7 @@ Say: “Review my current proposals and show only the decisions you need from me
 - [Ready-to-use skill](plugins/agent-workflows/skills/agent-workflows/SKILL.md)
 - [Workflow index](workflows/README.md) and [agent-filled templates](templates/README.md)
 - [Synthetic worked example](examples/checkout-button.md)
+- [Direct project references and drift checks](docs/PROJECT_INTEGRATION.md)
 - [Private workspace setup](docs/PRIVATE_WORKSPACE.md)
 
 ## Build and validate

@@ -9,6 +9,7 @@
 - Existing coordinator/assignment discovery (local runtime IDs stay in local config):
 - Applicable checks and local/live acceptance boundaries:
 - Locked choices, holds and source-of-truth precedence:
-- Shared workflow location and fallback when unavailable:
+- `.agent-workflows.json` accepted revision/hashes and last upstream check result:
+- Direct library source, update/CI check and fallback when unavailable:
 - Publication/external action/release authority:
 - Last source revision checked; changes requiring refresh:

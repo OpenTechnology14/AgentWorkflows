@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agent-workflows",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Facilitate project ideas, bugs, proposals and reviews by turning human insights and decisions into complete agent prompts. Use for ongoing work coordination, not unrelated one-off questions."
 }
