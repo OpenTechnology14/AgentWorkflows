@@ -18,7 +18,7 @@ class ReferenceTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory()
         root=Path(self.temp.name).resolve();self.library=root/'library';self.project=root/'project'
         self.library.mkdir();self.project.mkdir()
-        for directory in ['workflows','templates','packaging']:
+        for directory in ['workflows','templates','packaging','docs']:
             shutil.copytree(ROOT/directory,self.library/directory)
         (self.library/'scripts').mkdir();shutil.copy2(ROOT/'scripts/project_reference.py',self.library/'scripts/project_reference.py')
         (self.project/'GUIDE.md').write_text('Synthetic guide with project authority.')
@@ -41,9 +41,20 @@ class ReferenceTests(unittest.TestCase):
         self.git('commit','--allow-empty','-qm','new commit')
         self.assertEqual(ref.inspect(self.project,self.library)['state'],'revision-drift')
     def test_upstream_change_is_not_silently_adopted(self):
-        result=ref.inspect(self.project,self.library,'1'*40)
+        (self.library/'workflows/BUGS.md').write_text('Changed upstream source')
+        self.git('add','.');self.git('commit','-qm','upstream change')
+        upstream=self.git('rev-parse','HEAD');self.git('checkout','--detach',self.lock['revision'])
+        result=ref.inspect(self.project,self.library,upstream)
         self.assertEqual(result['state'],'upstream-drift')
         self.assertEqual(ref.load_record(self.project)['revision'],self.lock['revision'])
+    def test_merge_or_unrelated_upstream_commit_with_identical_sources_is_current(self):
+        self.git('commit','--allow-empty','-qm','merge-equivalent metadata')
+        upstream=self.git('rev-parse','HEAD');self.git('checkout','--detach',self.lock['revision'])
+        result=ref.inspect(self.project,self.library,upstream)
+        self.assertEqual(result['state'],'current')
+        self.assertNotEqual(result['acceptedRevision'],result['upstreamRevision'])
+    def test_unavailable_upstream_object_is_not_current(self):
+        with self.assertRaises(ref.ReferenceError):ref.inspect(self.project,self.library,'1'*40)
     def test_cannot_record_dirty_source(self):
         (self.library/'workflows/BUGS.md').write_text('uncommitted')
         with self.assertRaises(ref.ReferenceError):ref.record(self.project,self.library,'GUIDE.md')

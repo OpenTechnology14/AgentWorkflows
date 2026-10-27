@@ -21,7 +21,7 @@ python3 /path/to/AgentWorkflows/scripts/project_reference.py check --library /pa
 ```
 
 - Verify the exact accepted revision and hashes before using its workflow. Read STARTUP, IDEA_GENERATION, INTAKE, PROMPT_TRANSLATION and the relevant stage directly from that checkout or its revision-pinned public source.
-- The upstream check compares the accepted revision with public main. Different upstream, changed source, missing record/source or an unavailable network check is explicit. It never silently rewrites the accepted version or claims the check passed.
+- The upstream check fetches public-main Git objects without changing HEAD/worktree, then compares accepted source hashes. A merge/squash commit with identical source is current even when its commit ID differs. Different upstream content, changed source, missing record/source or an unavailable network check is explicit. It never silently rewrites the accepted version or claims the check passed.
 - Offline checks omit `--upstream`: they prove the pinned local source, not freshness against main. Use `ci` to write a focused GitHub workflow that repeats the reference check on push/PR/manual runs. No scheduler or model call is added.
 - If library access is unavailable, preserve existing project rules and the short idea/intake fallback, label the gap, and hold only work that depends on the missing evidence. Never invent approval or replace a project's product authority.
 

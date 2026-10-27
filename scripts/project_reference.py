@@ -41,7 +41,7 @@ def source_files(library):
         raise ReferenceError('Invalid source reference list')
     if any(not re.fullmatch(r'(workflows|templates)/[A-Z_]+\.md',p) for p in references):
         raise ReferenceError('Only generic workflow/template references are accepted')
-    return sorted(['packaging/manifest.json','packaging/ENTRYPOINT.md','scripts/project_reference.py',*references])
+    return sorted(['packaging/manifest.json','packaging/ENTRYPOINT.md','scripts/project_reference.py','docs/PROJECT_INTEGRATION.md',*references])
 
 def load_record(project):
     lock=json.loads(file_at(project,RECORD).read_text())
@@ -54,7 +54,7 @@ def load_record(project):
     if not isinstance(lock.get('files'),dict) or not lock['files']:
         raise ReferenceError('Nonempty source hashes required')
     for path,digest in lock['files'].items():
-        if path not in ('packaging/manifest.json','packaging/ENTRYPOINT.md','scripts/project_reference.py') and not re.fullmatch(r'(workflows|templates)/[A-Z_]+\.md',path):
+        if path not in ('packaging/manifest.json','packaging/ENTRYPOINT.md','scripts/project_reference.py','docs/PROJECT_INTEGRATION.md') and not re.fullmatch(r'(workflows|templates)/[A-Z_]+\.md',path):
             raise ReferenceError('Unexpected source path in reference record')
         if not isinstance(digest,str) or not re.fullmatch(r'[0-9a-f]{64}',digest):
             raise ReferenceError('SHA-256 source hash required')
@@ -83,10 +83,23 @@ def inspect(project,library,upstream_revision=None):
     if upstream_revision is not None:
         if not re.fullmatch(r'[0-9a-f]{40}',upstream_revision):
             raise ReferenceError('Invalid upstream revision')
+        try:
+            git(library,'cat-file','-e',upstream_revision+'^{commit}')
+        except subprocess.SubprocessError as e:
+            raise ReferenceError('Upstream commit unavailable locally') from e
+        upstream_changed=[]
+        for relative,expected in lock['files'].items():
+            try:
+                data=subprocess.check_output(['git','-C',str(library),'show',f'{upstream_revision}:{relative}'],stderr=subprocess.PIPE,timeout=20)
+                if hashlib.sha256(data).hexdigest()!=expected:
+                    upstream_changed.append(relative)
+            except subprocess.CalledProcessError:
+                upstream_changed.append(relative)
         result['upstreamRevision']=upstream_revision
-        result['upstream']='current' if upstream_revision==lock['revision'] else 'different'
+        result['upstreamChanged']=upstream_changed
+        result['upstream']='different' if upstream_changed else 'current'
         if result['state']=='current-local':
-            result['state']='current' if result['upstream']=='current' else 'upstream-drift'
+            result['state']='upstream-drift' if upstream_changed else 'current'
     return result
 
 def record(project,library,guide):
@@ -140,12 +153,13 @@ def check_ci(project,lock):
     if path.exists() and path.read_text()!=workflow(lock):
         raise ReferenceError('Generated reference CI differs; regenerate it with ci')
 
-def read_upstream():
-    completed=subprocess.run(['git','ls-remote','--exit-code',REPOSITORY+'.git',UPSTREAM],check=True,capture_output=True,text=True,timeout=20)
-    result=completed.stdout.split()
-    if len(result)!=2 or result[1]!=UPSTREAM:
+def read_upstream(library):
+    # Refresh Git objects only; never move HEAD, reset files or execute fetched code.
+    subprocess.run(['git','-C',str(library),'fetch','--no-tags',REPOSITORY+'.git',UPSTREAM],check=True,capture_output=True,text=True,timeout=20)
+    revision=git(library,'rev-parse','FETCH_HEAD')
+    if not re.fullmatch(r'[0-9a-f]{40}',revision):
         raise ReferenceError('Upstream response is unavailable or malformed')
-    return result[0]
+    return revision
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -177,12 +191,12 @@ def main():
             check_ci(args.project,load_record(args.project))
             if args.upstream:
                 try:
-                    latest=read_upstream()
+                    latest=read_upstream(args.library)
+                    result=inspect(args.project,args.library,latest)
                 except (subprocess.SubprocessError,OSError,ReferenceError):
                     result['upstream']='unavailable'
                     print(json.dumps(result,sort_keys=True))
                     return 2
-                result=inspect(args.project,args.library,latest)
             print(json.dumps(result,sort_keys=True))
             return 0 if result['state'] in ('current','current-local') else 1
         print(json.dumps(result,sort_keys=True))
