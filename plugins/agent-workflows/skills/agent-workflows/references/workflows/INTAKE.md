@@ -1,0 +1,14 @@
+# Intake, ideas and conclusions
+
+> **Status:** Maintained reusable procedure · Target-project rules retain authority
+
+
+- Accept an idea, reported bug, simple change, audit/test failure, proposal remainder, PR review finding or owner/operator request from an available authorized source.
+- Preserve original words/source, project, date/revision and kind. Observation is not cause; a requested change is not automatically a defect. Unclear project ownership stays unassigned until evidence or one concise answer resolves it.
+- Check urgent security records first. Investigate credible reports safely; do not require destructive production reproduction.
+- Classify each claim: VERIFIED, OBSERVED DEFECT, DOCUMENTED CLAIM, ASSUMPTION, DECISION REQUIRED, PROPOSED or NOT IMPLEMENTED. Keep source, test and deployed proof separate.
+- Deduplicate against canonical proposals, bugs, issues, PRs and assignments. Route as evidence-only, duplicate/superseded, existing-parent slice, parent refresh, new proposal, or deferred/blocked. One outcome has one implementation owner.
+- For exploration, offer up to three relevant options with tradeoffs and the smallest useful version. The owner's conclusion controls scope; an agent's evidence conclusion does not invent a product decision.
+- Preserve the exact answer and one plain consequence. A clear answer updates scope, acceptance and the next prompt; routine technical steps need no repeated approval. Silence and elapsed time answer nothing.
+- Update source backlink, canonical parent, registry/queue and evidence together when authorized by the project's SOP. An approval-preview sweep prepares corrections rather than silently approving or closing work.
+- Generate the next complete prompt using workflows/PROMPT_TRANSLATION.md. Held work keeps its existing trigger; do not generate prohibited planning work to fill a queue.
