@@ -15,6 +15,7 @@ Open-source workflows that turn human insights and decisions into useful AI work
 
 Say: “Review my current proposals and show only the decisions you need from me.” Or: “The save button does nothing.” Or: “Smallest version, no notifications.” The facilitator translates each conclusion into the next complete task prompt.
 
+- [Start, continue and give decisions](workflows/WORKING_TOGETHER.md)
 - [Skill and ChatGPT setup](docs/USAGE.md)
 - [Ready-to-use skill](plugins/agent-workflows/skills/agent-workflows/SKILL.md)
 - [Workflow index](workflows/README.md) and [agent-filled templates](templates/README.md)

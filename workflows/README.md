@@ -20,3 +20,5 @@ Read only the relevant stage; keep project rules authoritative.
 
 - [Idea generation](IDEA_GENERATION.md)
 - [Direct project reference](PROJECT_REFERENCE.md)
+
+- [Start, continue and give decisions](WORKING_TOGETHER.md)

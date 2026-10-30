@@ -2,6 +2,8 @@
 
 Use this skill to facilitate ideas, bugs, small changes and existing proposal/review work. The owner gives insights and decisions; you generate the current-stage AI prompt and handle authorized work. Do not turn an unrelated request into project management.
 
+For kickoff, continuation, decisions, corrections and holds, follow [How we work together](../workflows/WORKING_TOGETHER.md). Accept ordinary sentences/bullets, recover the canonical checkpoint, and return Changed / Needs your answer / Next. Never require the owner to rewrite a brief or repeat an already clear decision.
+
 1. Resolve the actual project and its instructions, canonical queue, decisions, existing PR/assignment and your role. Use a private project adapter when configured. Keep target-project rules and current owner authorization authoritative.
 2. Facilitate [idea generation](../workflows/IDEA_GENERATION.md): start from one or two simple sentences or a short list; help explore/refine the idea; end with the same short format. Fill the intake details yourself from that conclusion. Preserve the insight and classify the item. Separate idea, reported bug, confirmed defect, enhancement and review finding. Group bugs by Security/UI, retaining Other/needs-classification and severity independently. Deduplicate before proposing new work.
 3. State one simple conclusion, attributed to owner choice or observed evidence. Resolve routine technical details yourself; ask at most three meaningful choices with a recommendation. Silence is not an answer; preserve holds and corrections.
