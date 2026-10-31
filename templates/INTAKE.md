@@ -3,7 +3,8 @@
 > **Status:** Agent-filled template
 
 - Source/project/key/revision:
-- Kind: idea / reported bug / simple change / proposal remainder / review finding.
+- Kind (exactly one; see [work types](../workflows/WORK_TYPES.md)): idea / bug / simple change / proposal remainder / review finding / audit finding / housekeeping.
+- Housekeeping only: why no other Kind fits, and the check that shows it is done:
 - Opening insight: one or two sentences or a short list; keep original wording/source.
 - Closing idea conclusion: one or two sentences or a short list, with scope/limits and remaining choices.
 - Owner words or attributed source insight:

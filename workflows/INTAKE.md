@@ -3,7 +3,8 @@
 > **Status:** Maintained reusable procedure · Target-project rules retain authority
 
 
-- Accept an idea, reported bug, simple change, audit/test failure, proposal remainder, PR review finding or owner/operator request from an available authorized source.
+- Accept any work item from an available authorized source (an idea, bug report, simple change, proposal remainder, review finding, audit or test finding, housekeeping, or an owner/operator request) and give it exactly one Kind from [work types](WORK_TYPES.md). An owner or operator request is a source, not a Kind: classify what it asks for.
+- Register the item before work starts ([entry gate](ENTRY_GATE.md)); reuse an existing row for the same outcome.
 - Preserve original words/source, project, date/revision and kind. Observation is not cause; a requested change is not automatically a defect. Unclear project ownership stays unassigned until evidence or one concise answer resolves it.
 - Check urgent security records first. Investigate credible reports safely; do not require destructive production reproduction.
 - Classify each claim: VERIFIED, OBSERVED DEFECT, DOCUMENTED CLAIM, ASSUMPTION, DECISION REQUIRED, PROPOSED or NOT IMPLEMENTED. Keep source, test and deployed proof separate.

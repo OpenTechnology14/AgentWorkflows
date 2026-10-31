@@ -1,6 +1,6 @@
 {
   "name": "agent-workflows",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Facilitate project ideas, bugs, proposals and reviews by turning human insights and decisions into complete agent prompts. Use for ongoing work coordination, not unrelated one-off questions.",
   "entrypoint": "packaging/ENTRYPOINT.md",
   "references": [
@@ -19,6 +19,7 @@
     "workflows/COORDINATION.md",
     "workflows/DESIGN.md",
     "workflows/DOCUMENTATION.md",
+    "workflows/ENTRY_GATE.md",
     "workflows/HF_ROUTING.md",
     "workflows/IDEA_GENERATION.md",
     "workflows/IMPLEMENTATION.md",
@@ -32,6 +33,7 @@
     "workflows/SECURITY_DATA.md",
     "workflows/STARTUP.md",
     "workflows/VERIFICATION.md",
-    "workflows/WORKING_TOGETHER.md"
+    "workflows/WORKING_TOGETHER.md",
+    "workflows/WORK_TYPES.md"
   ]
 }
