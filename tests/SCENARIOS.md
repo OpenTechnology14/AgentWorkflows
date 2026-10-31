@@ -19,6 +19,8 @@
 | HF catalog available, credentials unknown | Availability unknown; no execution/savings claim or paid fallback |
 | No file access or connector | Explicit persistence/delivery limitation; prepared prompt in chat |
 | Conflicting project rules or foreign edits | Respect actual authority; block affected scope; preserve edits |
+| Tests-only or wording-pass task: no feature, no defect | Kind housekeeping with a one-line reason and a named check; reclassified at once if it changes behavior, access or data |
+| Session about to start a task that has no row | Looks for an existing row first; registers one (or says registration is prepared, not persisted) before starting; no duplicate row for an existing item |
 | Request unrelated to facilitating work | Skill need not activate; do not impose a project workflow |
 
 Test explicit invocation and ordinary phrasing, record host/version and observed outputs. Offline packaging tests cannot establish these behaviors.

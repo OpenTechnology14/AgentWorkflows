@@ -9,7 +9,7 @@ Start and finish exploration with one or two simple sentences or a short bullete
 
 ## One intake, different kinds of work
 
-Capture feature ideas, bug reports, simple changes, audit findings, proposal remnants, review comments and acceptance failures from any **available, authorized** source: this conversation, a project coordinator, an existing issue/PR or project documents. “Anywhere” does not grant access to an unconnected app, start monitoring, or authorize sending private content elsewhere. If the project/source is ambiguous, keep an unassigned intake note and ask only what cannot be inferred.
+Capture ideas, bug reports, simple changes, proposal remainders, review findings, audit findings and housekeeping (one Kind each; see [work types](WORK_TYPES.md)) from any **available, authorized** source: this conversation, a project coordinator, an existing issue/PR or project documents. “Anywhere” does not grant access to an unconnected app, start monitoring, or authorize sending private content elsewhere. If the project/source is ambiguous, keep an unassigned intake note and ask only what cannot be inferred.
 
 Idea generation includes improving broken behavior and small adjustments. Keep the original report distinct from a proposed solution: “button fails” is a reported bug; “use a dropdown” is a change idea until evidence establishes a defect. Reuse an existing item when the outcome matches. If an item's proposal already exists, enter at its actual stage instead of restarting idea generation. the private idea inbox is the intake view, the private bug view groups defects, and the project's existing queue retains implementation authority.
 
@@ -19,8 +19,9 @@ For each active item, maintain this small translation record beside its canonica
 
 ```text
 Item: project + canonical ID/source key (temporary source key if intake is not allocated)
-Kind: idea | reported bug | confirmed bug | simple change | proposal | review finding
-Bug group: Security | UI | Other/needs classification | not a bug
+Kind: idea | bug | simple change | proposal remainder | review finding | audit finding | housekeeping
+Bug group: Security | UI | Other/needs classification | not a bug (file under another Kind)
+Bug state: reported | confirmed | n/a
 Insight: exact safe owner words or attributed source; date/revision
 Evidence: observed facts, documented claims and unknowns kept separate
 Conclusion: one plain sentence, attributed to owner or agent evidence
@@ -46,6 +47,7 @@ The facilitator fills the [complete brief contract](../templates/AGENT_PROMPT.md
 | Direction settled | Expand conclusion into project SOP/template, allowed paths, dependencies, done conditions, tests, rollout/rollback and existing authority | Bounded implementation prompt if authorized; otherwise a prepared plan with the precise missing boundary |
 | Implementation authorized | Execute one scoped slice using existing assignment/worktree; preserve constraints; test relevant behavior; return evidence and residual failures | Generate a reviewer prompt against the actual diff and owner conclusion |
 | Review finding | Classify bug vs scope change, severity and existing parent; generate repair prompt only within authority | Verified fix then targeted re-review; bounded iteration, no HF fix-until-green |
+| Housekeeping item | Read the records, tests or tooling involved; confirm nothing changes behavior, access, data or a public contract (otherwise reclassify); name the check that proves it done; keep to the stated records | Done with named evidence, or reclassified. Never a way around review or security gates |
 | Review passed but live/manual proof absent | Prepare the exact acceptance checklist, target and prerequisites; show the owner only their necessary action/choice | Local/source completion remains distinct from release/production acceptance |
 | Acceptance complete | Reconcile proposal/bug/queue evidence together; summarize outcome; generate next authorized item's prompt | Close only with proof; retain pending questions/holds and release gates |
 
@@ -75,4 +77,6 @@ Keep prompt mechanics behind links unless requested. Prefer T3's native question
 - “The save button does nothing.” → bug intake, UI symptom; generate reproduction/triage prompt. Do not invent a cause or request redesign approval. If investigation finds a tenant authorization defect, Security becomes primary and UI remains a tag.
 - “Make labels a dropdown; keep everything else.” → simple change, minimal scope; deduplicate against label PRs, then generate the appropriate review/implementation prompt under actual authority.
 - “Yes, smallest version, no emails.” → save that exact conclusion; generate the next scoped prompt with email sends excluded. Do not ask the owner to write it.
+- “Add boundary tests; no behavior change.” → housekeeping: no feature and no defect; name the test run that proves it, and reclassify if a test exposes a defect.
+- “Reword every open decision as one question.” → housekeeping (a format pass over records); check that no decision text was removed.
 - “This is already fixed.” → verify linked proof; generate closure reconciliation, not another implementation task.
