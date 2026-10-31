@@ -17,3 +17,11 @@ Read only the relevant stage; keep project rules authoritative.
 - [Security Data](SECURITY_DATA.md)
 - [Startup](STARTUP.md)
 - [Verification](VERIFICATION.md)
+
+- [Idea generation](IDEA_GENERATION.md)
+- [Direct project reference](PROJECT_REFERENCE.md)
+
+- [Start, continue and give decisions](WORKING_TOGETHER.md)
+
+- [Work types: one Kind per item](WORK_TYPES.md)
+- [Entry gate: register, then start](ENTRY_GATE.md)

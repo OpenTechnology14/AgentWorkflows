@@ -2,8 +2,9 @@
 
 Open-source workflows that turn human insights and decisions into useful AI work.
 
+- **Start and finish ideas simply:** one or two sentences or a short list; the facilitator helps shape the idea and fills intake.
 - **You bring ideas and decisions.** The agent investigates, writes prompts and carries authorized work forward.
-- **One intake:** ideas, bugs, small changes, proposals, audits and review findings.
+- **One intake, one list of Kinds:** idea, bug, simple change, proposal remainder, review finding, audit finding and housekeeping.
 - **Simple conclusions drive each next prompt.** No technical forms for the owner.
 - **Security and UI bug groups**, with other defects kept visible.
 - **Short bulleted updates:** changed, needs your answer, next.
@@ -14,10 +15,13 @@ Open-source workflows that turn human insights and decisions into useful AI work
 
 Say: “Review my current proposals and show only the decisions you need from me.” Or: “The save button does nothing.” Or: “Smallest version, no notifications.” The facilitator translates each conclusion into the next complete task prompt.
 
+- [Start, continue and give decisions](workflows/WORKING_TOGETHER.md)
+- [Work types](workflows/WORK_TYPES.md) and the [entry gate: register, then start](workflows/ENTRY_GATE.md)
 - [Skill and ChatGPT setup](docs/USAGE.md)
 - [Ready-to-use skill](plugins/agent-workflows/skills/agent-workflows/SKILL.md)
 - [Workflow index](workflows/README.md) and [agent-filled templates](templates/README.md)
 - [Synthetic worked example](examples/checkout-button.md)
+- [Direct project references and drift checks](docs/PROJECT_INTEGRATION.md)
 - [Private workspace setup](docs/PRIVATE_WORKSPACE.md)
 
 ## Build and validate
