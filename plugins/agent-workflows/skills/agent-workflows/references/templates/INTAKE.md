@@ -1,0 +1,17 @@
+# Intake record
+
+> **Status:** Agent-filled template
+
+- Source/project/key/revision:
+- Kind (exactly one; see [work types](../workflows/WORK_TYPES.md)): idea / bug / simple change / proposal remainder / review finding / audit finding / housekeeping.
+- Housekeeping only: why no other Kind fits, and the check that shows it is done:
+- Opening insight: one or two sentences or a short list; keep original wording/source.
+- Closing idea conclusion: one or two sentences or a short list, with scope/limits and remaining choices.
+- Owner words or attributed source insight:
+- Expected/actual behavior and evidence classification:
+- Security/UI/other classification; impact/severity if defect:
+- Existing parent/PR/assignment and duplicate search:
+- Conclusion (owner decision vs agent evidence):
+- Actual authority, holds and genuine pending choice:
+- Disposition: evidence / duplicate / existing slice / parent refresh / new proposal / held.
+- Next concrete prompt stage/version/path and delivery state:

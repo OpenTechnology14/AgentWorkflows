@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Workflows"
+  short_description: "Turn insights and decisions into agent work"
+  default_prompt: "Use $agent-workflows to review my project work and generate the next prompts from my decisions."
