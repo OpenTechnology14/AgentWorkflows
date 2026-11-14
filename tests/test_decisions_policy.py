@@ -18,6 +18,9 @@ class DecisionGatePolicy(unittest.TestCase):
         self.assertIn("AW-POLICY-DECISIONS-05", text)
         self.assertIn("**Question:**", text)
         self.assertIn("`Reasoning:`", text)
+        self.assertIn("- **Context:** why now", text)
+        self.assertIn("#reasoning-for-<gate-id>", text)
+        self.assertNotIn("four headings", text)
         positions = [text.index(f"**{heading}**") for heading in HEADINGS]
         self.assertEqual(positions, sorted(positions))
 
