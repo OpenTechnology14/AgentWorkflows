@@ -13,6 +13,7 @@ It is a library of plain-language procedures. Nothing here runs: there is no ser
 - **Quality workflows** for proposals, design, implementation, verification, review and release, audits, bugs, security and data, documentation, and project logs. See the [workflow index](workflows/README.md).
 - **Templates** the assistant fills in for you: intake, proposal, bug, design, question, decision, review, generated prompt, project adapter, row schema, content controls and a starter set of project logs. See the [template index](templates/README.md).
 - **Direct project references and drift checks.** A small script records which library revision a project follows and reports when it has drifted ([how it works](docs/PROJECT_INTEGRATION.md)).
+- **Repository management.** A duplicate-repository sync tracker and a public-migration playbook ([module](modules/repo-management/README.md)).
 
 The same sources build three packages: an Agent Skill, a ChatGPT/Codex plugin, and a plain instruction pack for chat tools.
 
