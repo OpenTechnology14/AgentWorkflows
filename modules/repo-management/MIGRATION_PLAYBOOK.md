@@ -49,20 +49,22 @@ Do the irreversible steps (5 to 7) in one short window, with the tree already bu
 9. **After the first CI run,** protect `main`: pull request required, no required approvals if you are the only maintainer, the CI job name read from the actual run as the required check, linear history, no force-push or deletion, an administrator bypass left available.
 10. **Verify from a fresh clone:** exactly one commit, noreply identities, CI green, every setting read back.
 11. **Close the mirror.** Delete any temporary candidate branch from it, then archive it.
-12. **Repoint consumers.** The old pinned links stop resolving at step 7. For each pinned file compare its blob at the old and the new revision: identical means replace the revision; different means review the sentence that quotes it. Re-record each project's reference and open one pull request per project.
+12. **Repoint consumers.** Links to the old pinned revisions stop resolving for everyone else at step 6, when the original goes private, and stay broken after step 7, because the new repository does not contain those commits. For each pinned file compare its blob at the old and the new revision: identical means replace the revision; different means review the sentence that quotes it. Re-record each project's reference and open one pull request per project.
 13. **Record the pair** in the [sync tracker](SYNC_TRACKER.md) and the decisions in your private records.
 
-**Gotchas.** In zsh, `$SHA:refs/heads/main` is a modifier, not a refspec: write `${SHA}:refs/heads/main`. Dependabot opens a pull request on the new repository within minutes. Squash merges are safe for identity only when the account keeps its email private: check the first merge commit. A repository that was only renamed keeps its old URL as a redirect until you create a new one with that name, so the window between steps 6 and 7 is when old links 404.
+**Gotchas.** In zsh, `$SHA:refs/heads/main` is a modifier, not a refspec: write `${SHA}:refs/heads/main`. Dependabot opens a pull request on the new repository within minutes. Squash merges are safe for identity only when the account keeps its email private: check the first merge commit. Between steps 6 and 7 the old URL redirects to the private archive and 404s for everyone but you; step 7 ends that redirect, and the old name then resolves to the new repository.
 
 ## 5. Reference migrations
 
+Figures are from each audit at the time it ran.
+
 - **Job Hunter.** The audit found a personal address reachable through pull-request refs, which a history rewrite cannot clean. The project was re-created with a clean history: a new public repository, the original renamed, made private and archived, and a private sibling repository.
 - **The Agent Workflows library** (the predecessor of this repository). 9 of 15 commits across 11 refs carried a personal identity, 3 of them only behind pull-request refs. Content, secrets and private identifiers were clean, every repository control was off, there was no code of conduct, and the security policy had no private channel. The procedure above was followed: a private mirror, the original archived, one clean commit that also carried the content of two open pull requests, and a repoint of every pinned consumer. Choices worth copying: the conduct contact is the repository's private reporting form until a project mailbox exists; no tag or release was re-created; a short independent review ran before the irreversible steps.
-- **MyFeed.** 49 of 65 commits and every one of its 24 pull-request refs carried a real address. It had no license, code of conduct, security policy or contributing guide, a README written for internal contributors that named a private sibling, and none of the repository controls. It took the same shape as the others. Section 6 is the case its audit did not catch.
+- **MyFeed.** 49 of 65 commits and every one of its 24 pull-request refs carried a real address. It had no license, code of conduct, security policy or contributing guide, a README written for internal contributors that named a private sibling, and none of the repository controls. It took the same shape as the others.
 
 ## 6. Cautionary tale: generated artifacts
 
-In the third migration above, the public first commit still held a generated proposal dashboard (`proposal-dashboard.html`) and its snapshot receipt. Both embedded **73 rows from a different, private project's queue**, and the receipt named that project's source file and its hash. The audit had counted addresses, scanned for secrets and searched for names, and all of those passed. Only opening the generated files and looking for another project's identifiers finds this.
+A migration's public first commit can still carry another project's content. In one migration, a generated dashboard page and its snapshot receipt embedded **dozens of rows from a different, private project's queue**, and the receipt named that project's source file and its hash. The audit had counted addresses, scanned for secrets and searched for names, and all of those passed. Only opening the generated files and looking for another project's identifiers finds this.
 
 - **A fresh repository removes old history, not content.** Whatever is in the first commit is public.
 - List every generated file and read it, not just the source that produced it.

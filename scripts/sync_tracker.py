@@ -33,6 +33,8 @@ def parse(text: str) -> tuple[dict, list[dict]]:
             current = {item.group(1): clean(item.group(2)), "_line": number}
             pairs.append(current)
         elif field and current is not None:
+            if field.group(1) in current:
+                raise ValueError(f"line {number}: duplicate key {field.group(1)}")
             current[field.group(1)] = clean(field.group(2))
         elif re.match(r"^\w+:", raw):
             key, _, value = raw.partition(":")
@@ -54,7 +56,7 @@ def problems(top: dict, pairs: list[dict]) -> list[str]:
     found: list[str] = []
     if top.get("schema") != "1":
         found.append("schema must be 1")
-    if "pairs" not in top and not pairs:
+    if not pairs:
         found.append("no pairs")
     seen: set[str] = set()
     for pair in pairs:
@@ -84,6 +86,15 @@ def problems(top: dict, pairs: list[dict]) -> list[str]:
                     found.append(f"{where}: {key} must be YYYY-MM-DD")
         if pair.get("drift") not in (None, "none") and not pair.get("drift_reason"):
             found.append(f"{where}: drift needs a drift_reason")
+        if pair.get("drift") == "none" and pair.get("drift_reason"):
+            found.append(f"{where}: drift_reason must be empty when drift is none")
+        if pair.get("drift") == "none" and pair.get("kind") == "mirror" and pair.get("last_synced_private_sha") != pair.get("last_synced_other_sha"):
+            found.append(f"{where}: a mirror with no drift must record the same revision on both sides")
+        try:
+            if date.fromisoformat(pair["checked_at"]) < date.fromisoformat(pair["last_synced_at"]):
+                found.append(f"{where}: checked_at cannot be earlier than last_synced_at")
+        except (KeyError, ValueError):
+            pass
         if "@" in pair.get("owner", ""):
             found.append(f"{where}: owner must be a role or team, not an address")
     return found

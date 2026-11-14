@@ -28,8 +28,14 @@ class Playbook(unittest.TestCase):
         text = (MODULE / "MIGRATION_PLAYBOOK.md").read_text(encoding="utf-8")
         for name in ("Job Hunter", "Agent Workflows library", "MyFeed"):
             self.assertIn(name, text)
-        self.assertIn("proposal-dashboard.html", text)
-        self.assertIn("73 rows", text)
+        self.assertIn("different, private project's queue", text)
+        self.assertIn("another project's identifiers", text)
+
+    def test_the_cautionary_case_does_not_say_which_repository_or_how_many_rows(self):
+        text = (MODULE / "MIGRATION_PLAYBOOK.md").read_text(encoding="utf-8")
+        section = text.split("## 6. Cautionary tale", 1)[1].split("## 7.", 1)[0]
+        for specific in ("proposal-dashboard", "73 rows", "MyFeed", "third migration"):
+            self.assertNotIn(specific, section)
 
     def test_the_procedure_names_the_pitfalls_that_were_hit(self):
         text = (MODULE / "MIGRATION_PLAYBOOK.md").read_text(encoding="utf-8")
@@ -61,6 +67,24 @@ class SyncTracker(unittest.TestCase):
 
     def test_an_address_as_owner_is_rejected(self):
         self.assertTrue(any("not an address" in p for p in check(self.example().replace("owner: maintainers", "owner: someone@example.invalid", 1))))
+
+    def test_an_empty_pairs_list_is_reported(self):
+        self.assertTrue(any("no pairs" in p for p in check("schema: 1\npairs:\n")))
+
+    def test_a_repeated_key_in_a_pair_is_rejected(self):
+        with self.assertRaises(ValueError):
+            check(self.example().replace("    owner: maintainers\n", "    owner: maintainers\n    owner: someone-else\n", 1))
+
+    def test_a_check_before_the_sync_is_reported(self):
+        self.assertTrue(any("earlier than last_synced_at" in p for p in check(self.example().replace("checked_at: 2026-02-01", "checked_at: 2026-01-01", 1))))
+
+    def test_a_mirror_without_drift_must_match_on_both_sides(self):
+        text = self.example().replace("last_synced_other_sha: 3333333333333333333333333333333333333333", "last_synced_other_sha: 4444444444444444444444444444444444444444", 1)
+        self.assertTrue(any("same revision on both sides" in p for p in check(text)))
+
+    def test_no_drift_with_a_leftover_reason_is_reported(self):
+        text = self.example().replace('    drift_reason: ""\n', '    drift_reason: "stale note"\n', 1)
+        self.assertTrue(any("must be empty when drift is none" in p for p in check(text)))
 
     def test_a_duplicate_id_is_reported(self):
         self.assertTrue(any("duplicate id" in p for p in check(self.example().replace("id: example-archive", "id: example-snapshot", 1))))
