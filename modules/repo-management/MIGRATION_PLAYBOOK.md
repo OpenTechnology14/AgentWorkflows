@@ -107,3 +107,26 @@ Watch the first week: triage the Dependabot pull request, confirm the security f
 ## 10. What a migration does not do
 
 It does not recall copies that already exist: public archives, caches, search indexes and other people's clones keep the old history. It does not change the past for anyone who pinned a commit and cached it. Treat anything that was public as having been seen, and rotate secrets that ever appeared in any ref.
+
+## 11. Keep for now, revisit later
+
+Some answers about a repository are neither yes nor no: keep a second maintainer's write access, keep an archived mirror, accept drift between a snapshot and its source, leave a visibility choice as it is. When the answer is "keep for now, revisit later":
+
+1. **Record the answer** on the decision with its date and mark it resolved with that note. Nothing is changed, removed or revoked.
+2. **Create the re-check reminder row in the same change.** The default is 90 days after the answer; the owner may name another interval, and the row says which. Without the row, "keep for now" is a silent yes.
+3. **The row is a housekeeping row,** scheduled rather than in progress, with `recheck_of` (the decision or row it came from) and `recheck_on` (the date) in its fields.
+4. **On or after the date,** the re-check re-reads the facts with the same commands that produced the first report, says what changed, and asks the same question again with a recommendation. It never acts on the answer by itself.
+5. **The re-check ends with a new answer.** Keep again creates the next reminder; change becomes an ordinary row. The old reminder is closed either way.
+
+Make the row with the helper, and list the reminders that have come due:
+
+```bash
+python3 scripts/revisit_reminder.py row --of <decision or row ID> --title "<what is kept>" --answered YYYY-MM-DD
+python3 scripts/revisit_reminder.py due --file <your tracker file> --today YYYY-MM-DD
+```
+
+`row` prints a table row (`--format json` prints the same fields for a structured store) and takes `--days` for another interval. `due` reads any file of table rows, finds the rows with a `recheck_on` date that is today or earlier and whose state is not closed, and prints them; run it at each session start or standup. The helper never writes to your tracker: pasting the row is part of recording the answer.
+
+A synthetic example: the owner answers "keep the second maintainer's access for now" on 2026-03-01. The decision is resolved with that note, and a reminder row is created that says `Scheduled 2026-05-30`. On that date the re-check lists the account's permission and activity again and asks the same question.
+
+This applies to decisions about access, retention, visibility and accepted drift in the [sync tracker](SYNC_TRACKER.md) (give the drift's `drift_reason` the reminder row's ID). It does not apply to a plain yes or no, which needs no reminder.
