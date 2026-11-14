@@ -43,7 +43,7 @@ If the private head equals `last_synced_private_sha` and the other head equals `
 
 ## The entry gate
 
-A change that touches one side of a pair is made to both sides in the same operation. If that is not possible, record `drift`, a `drift_reason` and the date before you stop; a drift with no reason is invalid. Before a snapshot is published, measure the pair first, so the export starts from a known state. The gate is a rule that people and reviewers apply; the checker below validates the tracker file, not anyone's behaviour.
+A change that touches one side of a pair is made to both sides in the same operation. If that is not possible, record `drift`, a `drift_reason` and the date before you stop; a drift with no reason is invalid. Before a snapshot is published, measure the pair first, so the export starts from a known state. A drift you choose to accept for now is a keep-for-now decision: give its `drift_reason` the ID of a re-check reminder row ([the pattern](MIGRATION_PLAYBOOK.md#11-keep-for-now-revisit-later)). The gate is a rule that people and reviewers apply; the checker below validates the tracker file, not anyone's behaviour.
 
 ## Checking the file
 

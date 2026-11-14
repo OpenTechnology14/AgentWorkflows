@@ -2,7 +2,7 @@
 
 > **Status:** Maintained reusable module · Target-project rules retain authority
 
-Two tools for projects that keep a private repository and a public one:
+Tools for projects that keep a private repository and a public one:
 
 | File | What it is for |
 |---|---|
@@ -10,6 +10,7 @@ Two tools for projects that keep a private repository and a public one:
 | [`SYNC_TRACKER.md`](SYNC_TRACKER.md) | How to track duplicate repositories (a private mirror, or a public snapshot of a private project) so neither side drifts unnoticed |
 | [`sync_tracker.yaml`](sync_tracker.yaml) | The tracker file, with a synthetic example you replace in your private records |
 | [`../../scripts/sync_tracker.py`](../../scripts/sync_tracker.py) | A stdlib-only check for the tracker file |
+| [`../../scripts/revisit_reminder.py`](../../scripts/revisit_reminder.py) | Creates the re-check reminder row for a "keep for now, revisit later" answer and lists the reminders that are due ([the pattern](MIGRATION_PLAYBOOK.md#11-keep-for-now-revisit-later)) |
 
 **Use it when** a project is about to go public, has just gone public, or keeps a second copy of itself somewhere.
 

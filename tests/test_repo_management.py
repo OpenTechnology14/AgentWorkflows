@@ -10,7 +10,7 @@ import sync_tracker  # noqa: E402
 MODULE = ROOT / "modules" / "repo-management"
 SECTIONS = ["## 1. When to migrate", "## 2. What blocks", "## 3. OSS-readiness checklist", "## 4. The fresh-repository procedure",
             "## 5. Reference migrations", "## 6. Cautionary tale", "## 7. OSS compatibility matrix", "## 8. Public considerations",
-            "## 9. After the flip", "## 10. What a migration does not do"]
+            "## 9. After the flip", "## 10. What a migration does not do", "## 11. Keep for now, revisit later"]
 
 
 def check(text: str) -> list[str]:
