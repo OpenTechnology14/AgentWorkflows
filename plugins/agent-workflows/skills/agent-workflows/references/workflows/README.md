@@ -8,6 +8,7 @@ Read only the relevant stage; keep project rules authoritative.
 - [Checkpoints](CHECKPOINTS.md)
 - [Content ideas, approvals and reporting](CONTENT_APPROVAL.md)
 - [Coordination](COORDINATION.md)
+- [Decision gates](DECISIONS.md)
 - [Design](DESIGN.md)
 - [Documentation](DOCUMENTATION.md)
 - [Drive and review](DRIVE_REVIEW.md)
