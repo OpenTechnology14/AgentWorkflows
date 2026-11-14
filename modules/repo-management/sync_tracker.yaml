@@ -1,0 +1,27 @@
+# Synthetic example. Replace it in your private records; never commit real pairs to a public repository.
+schema: 1
+pairs:
+  - id: example-snapshot
+    kind: snapshot
+    private_repo: example-org/app-private
+    public_repo: example-org/app
+    method: "Export committed files with the project's snapshot script, then publish one new commit"
+    last_synced_private_sha: 1111111111111111111111111111111111111111
+    last_synced_other_sha: 2222222222222222222222222222222222222222
+    last_synced_at: 2026-01-15
+    drift: private-ahead
+    drift_reason: "Three private commits since the last export; the next export is planned"
+    checked_at: 2026-02-01
+    owner: maintainers
+  - id: example-archive
+    kind: mirror
+    private_repo: example-org/old-app-archive
+    public_repo: example-org/old-app-private-copy
+    method: "Branches and tags pushed once at retirement; pull-request refs stay in the archive"
+    last_synced_private_sha: 3333333333333333333333333333333333333333
+    last_synced_other_sha: 3333333333333333333333333333333333333333
+    last_synced_at: 2026-01-10
+    drift: none
+    drift_reason: ""
+    checked_at: 2026-02-01
+    owner: maintainers
