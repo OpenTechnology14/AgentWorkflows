@@ -17,7 +17,7 @@ Read only the references needed for this stage:
 - [Proposals](../workflows/PROPOSALS.md), [design](../workflows/DESIGN.md), [implementation](../workflows/IMPLEMENTATION.md)
 - [Verification](../workflows/VERIFICATION.md), [review/release](../workflows/REVIEW_RELEASE.md), [audits](../workflows/AUDITS.md)
 - [Coordination](../workflows/COORDINATION.md), [HF routing](../workflows/HF_ROUTING.md), [model routing](../workflows/MODEL_ROUTING.md)
-- [Security/data](../workflows/SECURITY_DATA.md), [documentation](../workflows/DOCUMENTATION.md), [logs](../workflows/LOGS.md)
+- [Security/data](../workflows/SECURITY_DATA.md), [documentation](../workflows/DOCUMENTATION.md), [logs](../workflows/LOGS.md), [decision gates](../workflows/DECISIONS.md)
 - [Work types](../workflows/WORK_TYPES.md) and the [entry gate](../workflows/ENTRY_GATE.md)
 - [Content ideas, approvals and reporting](../workflows/CONTENT_APPROVAL.md), with the private [content adapter](../templates/CONTENT_ADAPTER.md)
 - [Agent-filled templates](../templates/README.md): use only the relevant form.

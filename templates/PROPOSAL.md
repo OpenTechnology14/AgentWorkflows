@@ -10,6 +10,20 @@ Source intake, canonical parent, actual approval/readiness, expected measurable 
 
 In/out of scope; exact owner conclusions, assumptions, unresolved choices and holds.
 
+Each unresolved choice is a decision gate with both tiers (`workflows/DECISIONS.md`):
+
+- **Gate <ID> — Question:** one short sentence.
+- A (Recommended): choice, one-line consequence. B: alternative, one-line consequence. C only if needed.
+- Default applied until answered, and its authority (exploration or drafting only).
+- Reasoning: link to the section below.
+
+### Reasoning for <gate ID>
+
+- **Context:**
+- **Trade-offs:**
+- **Downstream impact:**
+- **Cost of deferring:**
+
 ## 3. Verified current state
 
 Claim / classification / revision and evidence / consequence. Separate source and live proof.
