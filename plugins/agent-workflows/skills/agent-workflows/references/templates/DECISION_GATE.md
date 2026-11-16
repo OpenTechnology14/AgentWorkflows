@@ -8,7 +8,7 @@ Put this on one line in the gate's table row (or one option per line in a standa
 
 **Question:** [[one sentence, at most 25 words, ending in a question mark]] A (Recommended): [[what happens, in a short phrase and what it leads to]]. B: [[what happens]]. C: [[only for a third real choice]]. Reasoning: [below](#reasoning-for-[[gate-id-in-lower-case]])
 
-Nothing follows the pointer. A is the owner's or the source's recommendation; if the source records none, say so in the Context line below and that A is the author's suggestion.
+Nothing follows the pointer. If the source records no recommendation, write `A (Suggested):` instead of `A (Recommended):` here, in the Option A heading and in the Trade-offs header, and say in the Context line below that A is the author's suggestion.
 
 ## Tier 2: the full reasoning
 
