@@ -77,6 +77,7 @@ class PackagingTests(unittest.TestCase):
                 for target in re.findall(r'\[[^\]\n]+\]\(([^)\n]+)\)',z.read(name).decode()):
                     if '://' in target:continue
                     target=target.split('#')[0]
+                    if not target:continue  # a same-document anchor, such as a gate's pointer to its own reasoning
                     resolved=posixpath.normpath(posixpath.join(posixpath.dirname(name),target))
                     self.assertIn(resolved,names)
     def test_chat_pack_contains_no_host_filesystem_links(self):

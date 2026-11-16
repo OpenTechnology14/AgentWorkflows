@@ -6,6 +6,7 @@ Use only the template needed for the current stage. The owner provides insights 
 - [Proposal](PROPOSAL.md)
 - [Bug](BUG.md)
 - [Design](DESIGN.md)
+- [Decision gate](DECISION_GATE.md): both tiers of a decision, pre-structured
 - [Question](QUESTION.md)
 - [Decision](DECISION.md)
 - [Generated prompt](AGENT_PROMPT.md)

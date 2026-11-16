@@ -6,6 +6,7 @@
 - Exact owner words, date and source:
 - You chose (one sentence):
 - Reasoning it was answered against (section pointer and version):
+- Option chosen (letter) and which letter was recommended at the time:
 - This changes (scope/constraints/acceptance):
 - Actual authority: exploration / drafting / implementation / named release action.
 - Supersedes and retained history:
