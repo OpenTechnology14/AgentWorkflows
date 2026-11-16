@@ -33,7 +33,7 @@ def thin(text: str) -> bool:
     lead = re.match(r"^(none|unknown)\b\s*[—–:,.-]*\s*(.*)$", plain(text), re.I | re.S)
     if lead:
         return len(words(lead.group(2))) < 2
-    return len(words(text)) < 2 or "[[" in text
+    return "[[" in text or (len(words(text)) < 2 and not re.search(r"\d", text))  # one word is not an answer, a figure such as $0 is
 
 
 def labelled(lines):
@@ -112,8 +112,12 @@ def reasoning_problems(lines, letters):
 
 def simple_problems(cell: str):
     """Tier 1: the line after **Question:** up to the pointer. Returns (problems, option letters)."""
-    head = re.split(r"\bReasoning:", cell.split("**Question:**", 1)[1], maxsplit=1)[0]
+    raw = cell.split("**Question:**", 1)[1]
+    head = re.split(r"\bReasoning:", raw, maxsplit=1)[0]
     flat, problems = plain(head), []
+    pointer = re.search(r"Reasoning:\s*\[[^\]\n]*\]\(\s*<?[^\s)>]+>?\s*\)", raw)
+    if pointer and raw[pointer.end():].strip(" .,;"):
+        problems.append("there is text after the pointer")
     sentence = re.match(r"^(.*?\?)\s*(.*)$", flat, re.S)
     if not sentence or flat.count("?") != 1 or not sentence.group(1)[:1].isupper() or len(sentence.group(1).split()) > QUESTION_WORDS:
         problems.append("the question is not one capitalised sentence of at most 25 words ending in a question mark")
@@ -137,7 +141,10 @@ class DecisionGatePolicy(unittest.TestCase):
         text = read("workflows/DECISIONS.md")
         self.assertIn("AW-POLICY-DECISIONS-05", text)
         for phrase in ("**Question:**", "`Reasoning:`", "at most 25 words", "at most 450 characters", "#reasoning-for-<gate-id>", "Never invent a figure",
-                       "Unknown —", "None —", "decision gate template", "answered by someone who has never seen the project"):
+                       "Unknown —", "None —", "decision gate template", "answered by someone who has never seen the project",
+                       "at least two words, so a bare `yes` or `no` does not count", "at least two words, or a figure such as `$0`",
+                       "Nothing follows it", "says in the Context line that the source records no recommendation and A is the author's suggestion",
+                       "labelled in the Context line as the author's suggestion", "re-lettered if the source recommended another"):
             self.assertIn(phrase, text, phrase)
         order = [text.index(f"**{part}**") for part in ("Context", "Prerequisites", "Trade-offs", "Downstream impact", "Cost of deferring", "Worst case")]
         self.assertEqual(order, sorted(order))
@@ -212,7 +219,7 @@ class DecisionGatePolicy(unittest.TestCase):
     def test_the_proposal_record_follows_the_format_it_defines(self):
         text = read("docs/proposals/DECISION_GATES_TWO_TIERS.md")
         rows = gate_rows(text)
-        self.assertEqual(len(rows), 3, "AW-D09, AW-D10 and AW-D11")
+        self.assertEqual(len(rows), 4, "AW-D09 to AW-D12")
         for row in rows:
             cell = row.split("|")[2]
             gate = row.split("|")[1].strip(" `")
@@ -231,7 +238,8 @@ class ReferenceCheckerTests(unittest.TestCase):
 
     def test_the_simple_line_rules(self):
         self.assertEqual(simple_problems(self.GOOD)[0], [])
-        for bad in (self.GOOD.replace("A (Recommended)", "A"), self.GOOD.replace("B:", "C:"), self.GOOD.replace("Ship it now?", "Ship P-12 now?"),
+        self.assertEqual(simple_problems(self.GOOD + ".")[0], [])
+        for bad in (self.GOOD + " padding words here", self.GOOD + " C: a hidden third choice here.", self.GOOD.replace("A (Recommended)", "A"), self.GOOD.replace("B:", "C:"), self.GOOD.replace("Ship it now?", "Ship P-12 now?"),
                     self.GOOD.replace("Ship it now?", "Ship it now"), self.GOOD.replace("yes, ship it now.", "yes, " + "x" * 450 + "."),
                     self.GOOD.replace("Ship it now?", "Open `make` now?"), self.GOOD.replace("Ship it now?", " ".join(["go"] * 26) + "?")):
             self.assertNotEqual(simple_problems(bad)[0], [], bad[:60])
@@ -239,7 +247,7 @@ class ReferenceCheckerTests(unittest.TestCase):
     def test_thin_lines_are_not_answers(self):
         for thin_text in ("", "None", "n/a", "Nothing", "Unknown", "None — ok", "[[what it is]]"):
             self.assertTrue(thin(thin_text), thin_text)
-        for fine in ("None — no spend at all.", "Unknown — needs a vendor quote.", "About one hour of work (estimate)."):
+        for fine in ("None — no spend at all.", "Unknown — needs a vendor quote.", "About one hour of work (estimate).", "$0.", "$40/month"):
             self.assertFalse(thin(fine), fine)
 
 

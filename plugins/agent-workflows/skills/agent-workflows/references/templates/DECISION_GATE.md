@@ -8,13 +8,15 @@ Put this on one line in the gate's table row (or one option per line in a standa
 
 **Question:** [[one sentence, at most 25 words, ending in a question mark]] A (Recommended): [[what happens, in a short phrase and what it leads to]]. B: [[what happens]]. C: [[only for a third real choice]]. Reasoning: [below](#reasoning-for-[[gate-id-in-lower-case]])
 
+Nothing follows the pointer. A is the owner's or the source's recommendation; if the source records none, say so in the Context line below and that A is the author's suggestion.
+
 ## Tier 2: the full reasoning
 
 Put this in the same document as the gate. The options keep the letters, order and names used above.
 
 ### Reasoning for [[Gate ID]]
 
-- **Context:** [[what is being decided and why now; what is already decided, with links; what makes it a real choice]]
+- **Context:** [[what is being decided and why now; what is already decided, with links; what makes it a real choice; and, if the source records no recommendation, that A is the author's suggestion]]
 - **Prerequisites:** [[what must be true before this can be acted on at all, whichever option is chosen; or `None —` and why]]
 
 #### Option A (Recommended): [[short name]]

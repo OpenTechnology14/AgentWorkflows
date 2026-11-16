@@ -23,6 +23,7 @@ The `**Question:**` line and the A/B options already existed in the question tem
 | `AW-D09` | **Question:** Must every gate carry the full reasoning, even a small one? A (Recommended): yes, one short line per part. B: only gates that change scope, security or anything public. Reasoning: [below](#reasoning-for-aw-d09) | A | Skipping the reasoning for small gates is faster, but it makes "small" a judgment each author makes alone |
 | `AW-D10` | **Question:** May a reasoning line say it does not know a figure and what would settle it? A (Recommended): yes, written as Unknown and what would settle it. B: no, a gate waits until every figure is found. Reasoning: [below](#reasoning-for-aw-d10) | A | Requiring every cost and date unblocks nothing when the source does not hold them, and pressure to fill the gap produces invented figures |
 | `AW-D11` | **Question:** Should the simple line be capped at 450 characters? A (Recommended): yes, so it fits one status row. B: no cap, the reviewer judges length. Reasoning: [below](#reasoning-for-aw-d11) | A | A cap is mechanical and checkable, but the number is a judgment and a rich gate may need splitting to fit |
+| `AW-D12` | **Question:** Where an older gate records no recommendation, may the author suggest one and label it as theirs? A (Recommended): yes, suggest the smallest step that keeps the work moving and say it is the author's. B: no, leave the gate unanswerable until the owner supplies a recommendation. Reasoning: [below](#reasoning-for-aw-d12) | A | Many older gates say "needs you" with no default, and the new shape needs one recommended option on the line |
 
 ### Reasoning for AW-D09
 
@@ -149,6 +150,48 @@ The `**Question:**` line and the A/B options already existed in the question tem
   - **Unblocks:** Neither answer blocks anything.
 - **Cost of deferring:** The default applies, so new gates are held to 450 characters now. Older gates are not affected.
 - **Worst case:** A is chosen and a good gate is rejected for being twenty characters over. It shows up as a failed check, and trimming or splitting fixes it in minutes.
+
+### Reasoning for AW-D12
+
+- **Context:** The recommended option on the simple line must be the owner's or the source's own. Many older gates record no recommendation at all: they say "needs you" and ask for a name, a machine or a choice only the owner can make. The rule needs one recommended option on every line, so it needs an answer for these gates.
+- **Prerequisites:** None — the review check already exists, and the wording is in the policy.
+
+#### Option A (Recommended): the author suggests, and says so
+
+- **What it is:** Where the source records no recommendation, the author writes A as the smallest step that keeps the gate answerable, usually to give the missing answer now, and B as leaving it open. The Context line says the source records no recommendation and A is the author's suggestion.
+- **Unlocks:** Every older gate can be put in the shape and answered in one word, including the ones that wait only for the owner's input.
+- **Blocks:** Nothing, except a reader who skips the Context line and takes the suggestion for the owner's own view.
+- **Risks:** The suggestion is mistaken for a position the owner already took. Low to medium impact, and the Context label and the review check are the guard.
+- **Effort:** One sentence of Context for each such gate; the reviewer confirms the label.
+- **Money:** None — wording only, no new service.
+- **Incompatible with:** Option B.
+- **Needs first:** None — the review check in the drive and review workflow already asks the reviewer to confirm the label.
+
+#### Option B: no author suggestions
+
+- **What it is:** A gate whose source records no recommendation stays out of the new shape until the owner writes a recommendation for it.
+- **Unlocks:** Every recommendation the owner sees is one the owner or the source already holds.
+- **Blocks:** Back-filling those gates, and asking them in a status report, until the owner supplies a recommendation.
+- **Risks:** The owner must write a recommendation before being able to answer, so the rule meant to speed up answers slows the hardest ones. Medium impact.
+- **Effort:** One owner pass over each such gate (estimate: a few minutes each).
+- **Money:** None — no new service.
+- **Incompatible with:** Option A, and back-filling every older gate in one pass.
+- **Needs first:** The owner's time to write a recommendation for each such gate.
+
+#### Trade-offs
+
+| Axis | A (Recommended) | B |
+|---|---|---|
+| Gates that can be asked now | All of them | Only those that already have a recommendation |
+| Who holds the recommendation | The author, labelled | Always the owner or the source |
+| Chance the suggestion is taken for the owner's view | Low, because the label guards it | None |
+| Owner effort before a gate can be asked | None | A pass over each such gate |
+
+- **Downstream impact:**
+  - **Changes:** With A, the policy's recommendation rule and the review check name the labelled author's suggestion, as they now do. With B, they would not, and every back-fill would list the gates it cannot finish.
+  - **Unblocks:** A unblocks back-filling the gates that record no recommendation, in every project.
+- **Cost of deferring:** The default applies, so authors write labelled suggestions now. If the answer is B, those suggestions are removed and the gates are listed as waiting on the owner.
+- **Worst case:** A is chosen and the owner accepts a suggestion without noticing it was the author's, then finds it was not what they wanted. The Context line says whose it is and any answer can be changed; the cost is the rework of whatever started from it.
 
 ## Rollout and rollback
 

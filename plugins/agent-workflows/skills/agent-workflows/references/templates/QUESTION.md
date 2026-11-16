@@ -8,7 +8,7 @@
 - A (Recommended): recommended choice + what it leads to, in a short phrase.
 - B: alternative + what it leads to.
 - C: only for a third real choice.
-- Reasoning: link to the gate's own section "Reasoning for <gate ID>" in the document that owns it. Required, and it must hold the full reasoning for every option ([decision gates](../workflows/DECISIONS.md)).
+- Reasoning: link to the gate's own section "Reasoning for <gate ID>", in the same document as the gate; nothing follows it. Required, and it must hold the full reasoning for every option ([decision gates](../workflows/DECISIONS.md)).
 - Free text / Later always accepted.
 - Exactly what waits; independent authorized work:
 - State: pending / answered / deferred / superseded / needs-refresh.

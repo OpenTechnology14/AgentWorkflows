@@ -18,12 +18,12 @@ One line, in this order:
 In a table cell it stays on one line; in a standalone question each option goes on its own line. The rules, and who checks each:
 
 1. **One question.** One sentence, at most 25 words, one question mark, starting with a capital. The index generator checks this.
-2. **Plain words.** Write for someone who has never opened the project. No gate IDs, file names, paths, links, code spans or table pipes in the question or the options, and no acronym or product term a new reader would have to look up. The generator checks the first part; the reviewer reads the line cold and checks the rest.
-3. **Two or three options, lettered in order.** `A` and `B`, and `C` only for a third real choice. More options than that means more than one gate: split it. Each option is a short phrase and what it leads to.
-4. **One recommendation, and it is A.** The recommended option comes first and carries `(Recommended)`. No other option does.
+2. **Plain words.** Write for someone who has never opened the project. No gate IDs, file names, paths, links, code spans or table pipes in the question or the options, and no acronym or product term a new reader would have to look up. The generator checks what it can see: identifiers written in capitals (such as `P-067`), common file extensions, links, code spans and table pipes. The reviewer reads the line cold and checks the rest.
+3. **Two or three options, lettered in order.** `A` and `B`, and `C` only for a third real choice. More options than that means more than one gate: split it. Each option is a short phrase and what it leads to, at least two words, so a bare `yes` or `no` does not count.
+4. **One recommendation, and it is A.** The recommended option comes first and carries `(Recommended)`. No other option does. The recommendation is the owner's or the source's own. Where the source records none, the author writes A as the smallest step that keeps the gate answerable (for example, give the missing answer now) and B as leaving it open, and says in the Context line that the source records no recommendation and A is the author's suggestion.
 5. **Short enough for one status row.** The line, not counting the pointer, is at most 450 characters.
 6. **Answerable on its own.** The owner can reply `A`, `B`, `C`, yes, no, free text or `later` without opening tier 2. If the line cannot be answered without reading further, the question or the options are too vague. The reviewer checks this.
-7. **The pointer ends the line.** `Reasoning:` and a link to the anchor of the gate's own tier 2 section in the same document, `#reasoning-for-<gate-id>`.
+7. **The pointer ends the line.** `Reasoning:` and a link to the anchor of the gate's own tier 2 section in the same document, `#reasoning-for-<gate-id>`. Nothing follows it.
 
 ## Tier 2: the full reasoning
 
@@ -54,20 +54,20 @@ Each option carries these eight lines, in this order:
 
 The trade-offs table has one row per axis and one column per option, each column headed by the option's letter (the recommended one marked). Choose the axes that actually separate the options for this gate, at least two and usually three to six, for example the chance of exposing something public, work before release, whether it can be undone, cost, and what it asks of the owner.
 
-**Never invent a figure.** Every line carries real content. When the source does not give a number, a date, a price or an effect, write `Unknown —` and what would settle it. When a line truly has nothing to add, write `None —` and why. A bare `none`, `n/a`, `tbd`, `see above` or an empty line is not an answer, and a line still holding a template placeholder (`[[...]]`) is not finished. An effort or timing figure that is an estimate says so.
+**Never invent a figure.** Every line carries real content: at least two words, or a figure such as `$0` or `$40 a month`. When the source does not give a number, a date, a price or an effect, write `Unknown —` and what would settle it. When a line truly has nothing to add, write `None —` and why. A bare `none`, `n/a`, `tbd`, `see above` or an empty line is not an answer, and a line still holding a template placeholder (`[[...]]`) is not finished. An effort or timing figure that is an estimate says so.
 
 **Agreement.** The letters, order, names and recommendation on the simple line must match the section's option sub-headings and the trade-offs columns. When the reasoning changes, the simple line changes in the same edit. The index shows the line and the pointer, never a copy of the reasoning.
 
 **Small decisions.** A small gate keeps every part and every line, each as short as the truth allows. A line may say `None —` with its reason; it may not be left out.
 
-**Where it goes.** The gate lives in the proposal or record that owns the choice. The [question template](../templates/QUESTION.md) carries the simple line, the [proposal template](../templates/PROPOSAL.md) points at the gate template for each unresolved choice, and the [decision template](../templates/DECISION.md) records which reasoning the answer was given against, so a later reader sees what the owner knew.
+**Where it goes.** The gate lives in the proposal or record that owns the choice, and its pointer resolves to a section in that same document. The [question template](../templates/QUESTION.md) carries the simple line, the [proposal template](../templates/PROPOSAL.md) points at the gate template for each unresolved choice, and the [decision template](../templates/DECISION.md) records which reasoning the answer was given against, so a later reader sees what the owner knew.
 
 ## Review
 
 A machine can reject a gate with a missing tier, option, line, pointer or table, or a leftover placeholder. It cannot judge clarity or truth, so the reviewer ([drive and review](DRIVE_REVIEW.md)) checks, and records that they checked:
 
 1. The simple line can be answered by someone who has never seen the project, from that line alone.
-2. Each option is a real, distinct choice, and the recommendation is the owner's or the source's own, not one the author supplied.
+2. Each option is a real, distinct choice, and the recommendation is the owner's or the source's own, or is labelled in the Context line as the author's suggestion because the source records none.
 3. The full reasoning is complete and honest: no invented figures, every `Unknown —` says what would settle it, every estimate is labelled.
 4. The two tiers agree.
 
@@ -77,7 +77,7 @@ A gate that fails review is not presented to the owner.
 
 **Entry gate.** A gate may not enter a question index, a status report or a prompt for the owner unless both tiers exist, the pointer resolves to that gate's own section, and the section has every part above. This library supplies the rule; the project's index generator, reviewer or checks apply it.
 
-**Older gates.** Gates written before the rule keep working while they are listed as missing it, and each gets the full shape the next time it is touched. A project may keep a list of such gates that can only shrink; when the list is empty, the rule applies to every gate. Back-filling an older gate changes its shape, not its meaning: the owner's recommendation, the order of the options and the question stay as the source has them, and the reviewer compares before and after. Whoever drafts the back-fill, the same review applies.
+**Older gates.** Gates written before the rule keep working while they are listed as missing it, and each gets the full shape the next time it is touched. A project may keep a list of such gates that can only shrink; when the list is empty, the rule applies to every gate. Back-filling an older gate changes its shape, not its meaning: the question and the owner's recommendation stay as the source has them, the options are lettered so the recommended one is A (re-lettered if the source recommended another), and the reviewer compares before and after. Whoever drafts the back-fill, the same review applies.
 
 **Canonical example.** A proposal needs to know whether a generated dashboard may ship in a public export.
 
