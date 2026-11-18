@@ -17,11 +17,11 @@ Exactly this, on one line in a table cell or as a standalone question:
 
 The rules, and who checks each:
 
-1. **One plain question.** One sentence, at most 25 words, one question mark, starting with a capital. Write it for someone who has never opened the project: no gate IDs, file names, paths, links, code spans or table pipes, and no acronym or product term a new reader would have to look up. When the choice is between named things, the question names them, so the suggested answer makes sense on its own. The index generator checks what it can see: identifiers written in capitals (such as `P-067`), common file extensions, links, code spans and table pipes. The reviewer reads the question cold and checks the rest.
+1. **One plain question.** One sentence, at most 25 words, one question mark, starting with a capital. Write it for someone who has never opened the project: no gate IDs, file names, paths, links, code spans or table pipes, and no acronym or product term a new reader would have to look up. When the choice is between named things, the question names them, so the suggested answer makes sense on its own. The index generator checks what it can see: identifiers written in capitals (such as `P-067`), common file extensions, links, code spans and table pipes. The reviewer reads the question cold and checks the rest, including that it is a single sentence.
 2. **One suggested answer of one to three words.** `**Suggested:** Yes`, `**Suggested:** Option B`, `**Suggested:** Force-push`, `**Suggested:** Keep private`, `**Suggested:** 90-day re-check`. It names the recommended choice, and it names exactly one option of tier 2: either by letter (`Option B`) or by that option's name. It is a name, not a sentence: no commas, no consequences, no reasons, no second suggestion. Nothing follows it but an optional full stop.
-3. **Nothing else.** No options, no pointer, no explanation on the line. The options are in tier 2, which the index links to; a project's own table may keep its explanation in the cell before the question, and that stays as the project wrote it.
+3. **Nothing else.** No options, no pointer and no explanation on the line, and nothing before the question: the cell holds the line and only the line. A table that used to say more in that cell moves the text into the Context of tier 2, where the options are too, and which the index links to.
 4. **Answerable on its own.** The owner can reply `yes`, `no`, `Suggested`, a named alternative, free text or `later` from this line without opening tier 2. If the line cannot be answered without reading further, the question is too vague. The reviewer checks this.
-5. **The recommendation is the owner's or the source's own.** Where the source records none, the suggestion is the author's and the Context line says so (see tier 2).
+5. **The recommendation is the owner's or the source's own.** Where the source records none, the suggestion is the author's: the Context line says so (see tier 2), and an index with a recommendation column shows the suggestion there as the author's, not as a recorded recommendation.
 
 ## Tier 2: the full reasoning
 
@@ -56,7 +56,7 @@ The trade-offs table has one row per axis and one column per option, each column
 
 **Never invent a figure.** Every line carries real content: at least two words. In Money and Effort a single figure such as `$0` or `$40 a month` is enough. When the source does not give a number, a date, a price or an effect, write `Unknown —` and what would settle it. When a line truly has nothing to add, write `None —` and why. A bare `none`, `n/a`, `tbd`, `see above` or an empty line is not an answer, and a line still holding a template placeholder (`[[...]]`) is not finished. An effort or timing figure that is an estimate says it is one.
 
-**Agreement.** The suggested answer must name one option, that option's heading and its table column carry the mark, and the option letters run from A without gaps. When the reasoning changes, the suggested answer changes in the same edit. The index shows the question and the suggested answer, and links the section; it never copies the reasoning.
+**Agreement.** The suggested answer must name one option, that option's heading and its table column carry the mark, and the option letters run from A without gaps. A row that records its own default or recommendation, and names an option in it (by letter, as `Option B`, or by the option's name), names the same option the suggested answer does; free text that names no option is left alone. When the reasoning changes, the suggested answer changes in the same edit. The index shows the question and the suggested answer, and links the section; it never copies the reasoning.
 
 **Small decisions.** A small gate keeps every part and every line, each as short as the truth allows. A line may say `None —` with its reason; it may not be left out.
 
@@ -77,7 +77,7 @@ A gate that fails review is not presented to the owner.
 
 **Entry gate.** A gate may not enter a question index, a status report or a prompt for the owner unless both tiers exist, the suggested answer names an option, and the section has every part above. This library supplies the rule; the project's index generator, reviewer or checks apply it.
 
-**Older gates.** Gates written before the rule keep working while they are listed as missing it, and each gets the full shape the next time it is touched. A project may keep a list of such gates that can only shrink; when the list is empty, the rule applies to every gate. Back-filling an older gate changes its shape, not its meaning: the question and the owner's recommendation stay as the source has them, the Suggested words name that recommendation, and the reviewer compares before and after. Whoever drafts the back-fill, the same review applies.
+**Older gates.** Gates written before the rule keep working while they are listed as missing it, and each gets the full shape the next time it is touched. A project may keep a list of such gates that can only shrink; when the list is empty, the rule applies to every gate. Back-filling an older gate changes its shape, not its meaning: the question and the owner's recommendation stay as the source has them, the Suggested words name that recommendation, the text the old cell held before the question moves into the Context, and the reviewer compares before and after. Whoever drafts the back-fill, the same review applies.
 
 **Canonical example.** A proposal needs to know whether a generated dashboard may ship in a public export.
 

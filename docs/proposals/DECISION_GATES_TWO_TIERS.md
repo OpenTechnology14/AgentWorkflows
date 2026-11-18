@@ -14,7 +14,7 @@ The owner directed that every decision gate carry both a short answer and a full
 
 ## Where the rule meets earlier shapes
 
-The `**Question:**` line already existed in the question template and the [logs workflow](../../workflows/LOGS.md). The first version added a pointer and a four-part reasoning. The second, merged on 2026-11-16, put options A and B and a pointer on the same line and added prerequisites, eight lines per option, a comparison table and the worst case. The third replaces the line: the question and a suggested answer of one to three words, with nothing else. That retires three rules of the second shape, which no longer have a place to live: the 450-character cap, the mark on option A, and re-lettering options so the recommended one comes first. The full reasoning is unchanged except that the suggested option, whichever letter it has, carries the mark. A gate written in an earlier shape is an older gate under the rule: it keeps working while a project lists it as missing the full shape, and it gets the new shape the next time it is touched.
+The `**Question:**` line already existed in the question template and the [logs workflow](../../workflows/LOGS.md). The first version added a pointer and a four-part reasoning. The second, merged on 2026-11-16, put options A and B and a pointer on the same line and added prerequisites, eight lines per option, a comparison table and the worst case. The third replaces the line: the question and a suggested answer of one to three words, with nothing else. That retires three rules of the second shape, which no longer have a place to live: the 450-character cap, the mark on option A, and re-lettering options so the recommended one comes first. The full reasoning is unchanged except that the suggested option, whichever letter it has, carries the mark. The second shape also let a table cell keep an explanation before its question; the third does not, so that text moves into the Context. A gate written in an earlier shape is an older gate under the rule: it keeps working while a project lists it as missing the full shape, and it gets the new shape the next time it is touched.
 
 ## Decision gates
 
@@ -23,7 +23,7 @@ The `**Question:**` line already existed in the question template and the [logs 
 | `AW-D09` | **Question:** Must every gate carry the full reasoning, even a small one? **Suggested:** Yes | A | Skipping the reasoning for small gates is faster, but it makes "small" a judgment each author makes alone |
 | `AW-D10` | **Question:** May a reasoning line say it does not know a figure and what would settle it? **Suggested:** Yes | A | Requiring every cost and date unblocks nothing when the source does not hold them, and pressure to fill the gap produces invented figures |
 | `AW-D11` | **Question:** Should the suggested words name an option by its letter, by its name, or either? **Suggested:** Either | A | The owner's own examples use both, but a looser rule means a checker that has to reject a match that names two options |
-| `AW-D12` | **Question:** Where the source records no recommendation, must the Context say the suggestion is the author's? **Suggested:** Yes | A | The one-line tier has no room to say whose the suggestion is, so the full reasoning is the only place left |
+| `AW-D12` | **Question:** When the author, not the owner, made the suggestion, where should that be shown? **Suggested:** Reasoning and index | C | The one-line tier has no room to say whose the suggestion is, so the choice is between the full reasoning alone, nowhere, and the reasoning plus the index row the owner actually scans |
 
 ### Reasoning for AW-D09
 
@@ -163,45 +163,57 @@ The `**Question:**` line already existed in the question template and the [logs 
 
 ### Reasoning for AW-D12
 
-- **Context:** A suggestion should be the owner's or the source's own recommendation. Many older gates record none: they say "needs you" and ask for something only the owner can supply. The one-line tier has no room to say whose the suggestion is, so the rule needs somewhere else to say it.
-- **Prerequisites:** None — the Context line already exists in every gate.
+- **Context:** A suggestion should be the owner's or the source's own recommendation. Many older gates record none: they say "needs you" and ask for something only the owner can supply, so the suggestion is the author's own guess. The one-line tier has no room to say whose the suggestion is. That leaves the full reasoning, which the owner opens only when unsure, and the index row, which is what the owner scans.
+- **Prerequisites:** None — the Context line already exists in every gate, and the index already has a column for the recommendation.
 
-#### Option A: Yes (Suggested)
+#### Option A: Reasoning only
 
-- **What it is:** Where the source records no recommendation, the Context line says so and that the suggestion is the author's. The generator enforces it for a row whose own default column says none or is blank.
-- **Unlocks:** A reader of the section can tell a standing recommendation from a fresh author's guess, without cluttering the one-line tier.
-- **Blocks:** None — it rules nothing out.
-- **Risks:** An owner who reads only the one-line tier does not see whose suggestion it is. Low to medium impact, and the shape leaves no room for a marker on the line.
+- **What it is:** Where the source records no recommendation, the Context line says so and that the suggestion is the author's. The index shows the suggested words the same way for every gate.
+- **Unlocks:** A reader of the section can tell a standing recommendation from a fresh author's guess, with no change to how an index is built.
+- **Blocks:** A reader of the index row alone cannot tell the two apart.
+- **Risks:** An owner who scans only the index takes an author's guess for a recorded position. Medium impact, and it is found only after the answer.
 - **Effort:** One sentence of Context for each such gate; the reviewer confirms it (estimate: a minute each).
 - **Money:** None — wording only, no new service.
-- **Incompatible with:** Option B.
+- **Incompatible with:** Options B and C, which are the other answers to the same question.
 - **Needs first:** None — the review check already asks the reviewer to confirm whose the suggestion is.
 
-#### Option B: No
+#### Option B: Nowhere
 
-- **What it is:** The Context line does not have to say whose the suggestion is; a gate is simply suggested.
+- **What it is:** Nothing says whose the suggestion is; a gate is simply suggested.
 - **Unlocks:** Less writing, and one fewer check.
-- **Blocks:** Telling a recommendation the source records from an author's guess.
+- **Blocks:** Telling a recommendation the source records from an author's guess, in the section or in the index.
 - **Risks:** The owner takes an author's guess for a position the source already holds, and the index shows it as a standing recommendation. Medium impact, found only after the answer.
 - **Effort:** None — nothing to write.
 - **Money:** None — nothing changes.
-- **Incompatible with:** Option A, and a reviewer check that the suggestion is the owner's or the source's.
+- **Incompatible with:** Options A and C, and a reviewer check that the suggestion is the owner's or the source's.
 - **Needs first:** None — it removes a rule.
+
+#### Option C: Reasoning and index (Suggested)
+
+- **What it is:** The Context line says it, as in A. The index's recommendation column also shows `None recorded; the author suggests: <words>` for those gates, instead of showing the suggestion as if it were recorded.
+- **Unlocks:** The row the owner scans and the section agree: an author's guess is marked as one where it is read first.
+- **Blocks:** None — the one-line tier stays a question and a suggestion; only the text the index shows beside it changes.
+- **Risks:** An index that cannot tell a table with no recommendation column from one that records its recommendation under another heading marks a real recommendation as the author's. Low impact, and it shows up as a failing check on that table, fixed by naming the heading.
+- **Effort:** One sentence of Context per gate, as in A, plus a one-time change to an index generator; the first index generator to adopt the rule already does it (estimate: an hour, with tests).
+- **Money:** None — wording and code only.
+- **Incompatible with:** Options A and B, which are the other answers to the same question.
+- **Needs first:** An index generator that reads a table's recommendation column, which the first adopting generator already does.
 
 #### Trade-offs
 
-| Axis | A (Suggested) | B |
-|---|---|---|
-| Owner can tell whose the suggestion is | In the section | No |
-| Writing per gate with no recorded recommendation | One sentence | None |
-| Chance an author's guess is taken for a standing recommendation | Low | Real |
-| Checks the generator runs | One more, for rows with a default column | None |
+| Axis | A | B | C (Suggested) |
+|---|---|---|---|
+| Owner can tell whose the suggestion is in the section | Yes | No | Yes |
+| Owner can tell whose the suggestion is in the index row | No | No | Yes |
+| Writing per gate with no recorded recommendation | One sentence | None | One sentence |
+| Checks an index generator runs | One, on the Context | None | Two, the Context and the text beside the suggestion |
+| Chance an author's guess is taken for a standing recommendation | Real, in the index | Real | Low |
 
 - **Downstream impact:**
-  - **Changes:** With A, the generator requires the Context to name the author for a row whose default says none, and the review check says the same. With B, both are removed.
-  - **Unblocks:** Either answer unblocks the back-fill of gates that record no recommendation.
-- **Cost of deferring:** The default applies, so authors write the sentence now. If the answer is B, the sentences already written are harmless.
-- **Worst case:** A is chosen and the owner would rather not know whose suggestion it is; the sentence is one line in a section, and removing it is trivial.
+  - **Changes:** With C, the policy says the index marks such a suggestion as the author's, and the first adopting generator already requires the Context to name the author and renders the marked text. With A, the index text is removed from the generator. With B, the Context check goes too.
+  - **Unblocks:** Any answer unblocks the back-fill of gates that record no recommendation.
+- **Cost of deferring:** The default applies, so authors write the sentence and the index marks the suggestion. If the answer is A or B, the index text is removed in one small change and the sentences already written are harmless.
+- **Worst case:** C is chosen and the owner finds the marked text noisy; it is one text pattern in a generator and one sentence per gate, and removing it is one small change.
 
 ## Rollout and rollback
 

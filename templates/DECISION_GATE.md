@@ -4,7 +4,7 @@
 
 ## Tier 1: the simple answer
 
-Put this on one line in the gate's table row, or as a standalone question. Nothing else goes in it: no options, no pointer, no explanation. Write it for someone who has never seen the project: no gate IDs, file names, paths, links or code spans, and no term a new reader would have to look up.
+Put this on one line in the gate's table row, or as a standalone question. Nothing else goes in it: no options, no pointer, no explanation, and nothing before the question. Text a table cell used to hold there moves into the Context line below. Write it for someone who has never seen the project: no gate IDs, file names, paths, links or code spans, and no term a new reader would have to look up.
 
 **Question:** [[one sentence, at most 25 words, ending in a question mark]] **Suggested:** [[one to three words]]
 
@@ -12,7 +12,7 @@ The suggested words name the recommended choice and name exactly one option belo
 
 ## Tier 2: the full reasoning
 
-Put this in the same document as the gate. The heading text is exactly `Reasoning for` and the gate's ID, because the index finds the section by it. Each option name is one to three words. Add `(Suggested)` to the heading of the option the suggested words name, and to its column in the Trade-offs table; no other option carries it.
+Put this in the same document as the gate. The heading text is exactly `Reasoning for` and the gate's ID, because the index finds the section by it. Each option name is one to three words. Add `(Suggested)` at the end of the heading of the option the suggested words name, after its name (`#### Option B: Force-push (Suggested)`, not `#### Option B (Suggested): Force-push`), and to its column in the Trade-offs table; no other option carries it.
 
 ### Reasoning for [[Gate ID]]
 
