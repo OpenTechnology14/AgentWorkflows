@@ -28,7 +28,7 @@ HEADING = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
 OPTION_HEADING = re.compile(r"Option\s+([A-Za-z]):\s*(\S.*)$", re.I)
 BAD_OPTION_HEADING = re.compile(r"Option\s+[A-Za-z]\s*[(\-–—]", re.I)
 MARK = re.compile(r"\s*\(Suggested\)\s*$", re.I)
-AUTHOR = re.compile(r"\bauthor\b", re.I)
+AUTHOR = re.compile(r"\bauthors?\b", re.I)
 DEFAULT_ENDS = r"(?=\s*$|\s*[—–:.,;(]|\s+-\s)"
 IDENTIFIER = re.compile(r"\b[A-Z][A-Z0-9]{0,7}-[A-Z]?\d+[A-Za-z]?\b")
 NOT_AN_ID = {"GPT", "UTF", "ISO", "SHA", "AES", "RSA", "TLS", "SSL", "HTTP", "H", "MD", "USB", "MP"}
@@ -217,7 +217,8 @@ class DecisionGatePolicy(unittest.TestCase):
                        "at least two words", "In Money and Effort a single figure such as `$0` or `$40 a month` is enough",
                        "the Context line says so", "so the row carries no pointer", "carries `(Suggested)` at the end of its heading",
                        "two to four options", "the Suggested words name that recommendation",
-                       "including that it is a single sentence", "nothing before the question", "the cell holds the line and only the line", "shows the suggestion there as the author's",
+                       "including that it is a single sentence", "nothing before the question", "the cell holds the line and only the line",
+                       "A table with no recommendation column records none", "add a Default column when the recommendation is the owner's or the source's", "shows the suggestion there as the author's",
                        "free text that names no option is left alone", "moves the text into the Context of tier 2",
                        "the text the old cell held before the question moves into the Context"):
             self.assertIn(phrase, text, phrase)
@@ -390,7 +391,7 @@ class ReferenceCheckerTests(unittest.TestCase):
         for text in ("Nothing needs authorization.", "The authorities have not said.", "An authored draft exists."):
             bad = [line.replace("Why now.", text) for line in doc]
             self.assertTrue(any("author's" in p for p in reasoning_problems(bad, "Keep private", author_required=True)), text)
-        for text in ("The suggestion is the author's.", "The author suggests this.", "The Author's view is below."):
+        for text in ("The suggestion is the author's.", "The author suggests this.", "The Author's view is below.", "The authors suggest this."):
             good = [line.replace("Why now.", text) for line in doc]
             self.assertEqual(reasoning_problems(good, "Keep private", author_required=True), [], text)
 
