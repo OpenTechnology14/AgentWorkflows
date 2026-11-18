@@ -12,8 +12,8 @@ In/out of scope; exact owner conclusions, assumptions, unresolved choices and ho
 
 Each unresolved choice is a decision gate with both tiers, copied from the [decision gate template](DECISION_GATE.md) and governed by `workflows/DECISIONS.md`:
 
-- Tier 1, on one line in the gate's row: **Question:** one short plain sentence. A (Recommended): ... B: ... C only if needed. Reasoning: link to the section below.
-- Tier 2, a section `### Reasoning for <gate ID>` here: Context, Prerequisites, then for every option what it is, unlocks, blocks, risks, effort, money, what it is incompatible with and what it needs first; a trade-offs table; downstream impact (changes, unblocks); cost of deferring; and the worst case if the recommendation is wrong.
+- Tier 1, on one line in the gate's row: **Question:** one short plain sentence. **Suggested:** one to three words naming the recommended choice. Nothing else.
+- Tier 2, a section `### Reasoning for <gate ID>` here: Context, Prerequisites, then two to four options, each with what it is, unlocks, blocks, risks, effort, money, what it is incompatible with and what it needs first; a trade-offs table; downstream impact (changes, unblocks); cost of deferring; and the worst case if the suggested option is wrong.
 - Default applied until answered, and its authority (exploration or drafting only).
 
 ## 3. Verified current state

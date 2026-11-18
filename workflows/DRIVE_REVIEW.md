@@ -15,7 +15,7 @@ stronger-or-equal tier than the driver for that work.
   ([checkpoints](CHECKPOINTS.md)), flags issues, and sets `review_state`.
 - **Approval is a precondition, not a release.** An approved review makes a PR eligible to merge. Admin-bypass
   merges still need the authority the target project requires, which is often an explicit owner instruction per PR.
-- **A change that adds or edits a decision gate** is also checked against the gate review in [decision gates](DECISIONS.md#review): the reviewer reads the simple line cold, as someone with no project context, and confirms it can be answered from that line alone; confirms each option is real and the recommendation is the owner's or the source's; and confirms the full reasoning is complete and honest and agrees with the simple line. The reviewer records that they did.
+- **A change that adds or edits a decision gate** is also checked against the gate review in [decision gates](DECISIONS.md#review): the reviewer reads the question and the suggested answer cold, as someone with no project context, and confirms they can be answered from those words alone; confirms each option is real and the suggestion is the owner's or the source's (or the Context says it is the author's); and confirms the full reasoning is complete and honest and agrees with the suggested answer. The reviewer records that they did.
 - **Attribution.** The PR body states `Drive: <model>` and `Review: <model> — <approved|rejected>`, plus the row ID.
 - **One review pass per revision.** A rejection returns the row to its driver with the findings. Don't loop
   fix-until-green; escalate after a second rejection.
