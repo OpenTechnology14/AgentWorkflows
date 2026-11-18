@@ -1,8 +1,8 @@
-# Decision gates: a plain answer and a full reasoning
+# Decision gates: a plain question and a full reasoning
 
-> **Status:** Owner-directed implementation · **Date:** 2026-11-13, tightened 2026-11-16
+> **Status:** Owner-directed implementation · **Date:** 2026-11-13, tightened 2026-11-16, third shape 2026-11-17
 
-The owner directed that every decision gate carry both a one-line answer and a full reasoning. The rule is generic, so it lives in this library and projects point at it. On 2026-11-16 the owner raised the bar on both tiers: the simple answer must be plain enough for someone with no project context, and the reasoning must cover every option in full.
+The owner directed that every decision gate carry both a short answer and a full reasoning. The rule is generic, so it lives in this library and projects point at it. On 2026-11-16 the owner raised the bar on both tiers. On 2026-11-17 the owner narrowed the simple tier: the recommendation is one to three words, so the simple tier is only the plain question and a `**Suggested:**` line, and everything else is in the full reasoning.
 
 ## Contract
 
@@ -12,25 +12,25 @@ The owner directed that every decision gate carry both a one-line answer and a f
 | the templates | [`templates/DECISION_GATE.md`](../../templates/DECISION_GATE.md), [`templates/PROPOSAL.md`](../../templates/PROPOSAL.md), [`templates/QUESTION.md`](../../templates/QUESTION.md), [`templates/DECISION.md`](../../templates/DECISION.md), [`templates/REVIEW.md`](../../templates/REVIEW.md) |
 | the reviewer's duty | [`workflows/DRIVE_REVIEW.md`](../../workflows/DRIVE_REVIEW.md) |
 
-## Where the new rule meets existing ones
+## Where the rule meets earlier shapes
 
-The `**Question:**` line and the A/B options already existed in the question template and the [logs workflow](../../workflows/LOGS.md). The first version of this rule added a pointer and a four-part reasoning (context, trade-offs, downstream impact, cost of deferring). The tightening replaces that reasoning with the full shape: prerequisites, eight lines for every option, a comparison table and the worst case. A gate written in the four-part form is an older gate under the new rule: it keeps working while a project lists it as missing the full shape, and it gets the full shape the next time it is touched.
+The `**Question:**` line already existed in the question template and the [logs workflow](../../workflows/LOGS.md). The first version added a pointer and a four-part reasoning. The second, merged on 2026-11-16, put options A and B and a pointer on the same line and added prerequisites, eight lines per option, a comparison table and the worst case. The third replaces the line: the question and a suggested answer of one to three words, with nothing else. That retires three rules of the second shape, which no longer have a place to live: the 450-character cap, the mark on option A, and re-lettering options so the recommended one comes first. The full reasoning is unchanged except that the suggested option, whichever letter it has, carries the mark. The second shape also let a table cell keep an explanation before its question; the third does not, so that text moves into the Context. A gate written in an earlier shape is an older gate under the rule: it keeps working while a project lists it as missing the full shape, and it gets the new shape the next time it is touched.
 
 ## Decision gates
 
 | ID | Question | Default applied | Why it is a real choice |
 |---|---|---|---|
-| `AW-D09` | **Question:** Must every gate carry the full reasoning, even a small one? A (Recommended): yes, one short line per part. B: only gates that change scope, security or anything public. Reasoning: [below](#reasoning-for-aw-d09) | A | Skipping the reasoning for small gates is faster, but it makes "small" a judgment each author makes alone |
-| `AW-D10` | **Question:** May a reasoning line say it does not know a figure and what would settle it? A (Recommended): yes, written as Unknown and what would settle it. B: no, a gate waits until every figure is found. Reasoning: [below](#reasoning-for-aw-d10) | A | Requiring every cost and date unblocks nothing when the source does not hold them, and pressure to fill the gap produces invented figures |
-| `AW-D11` | **Question:** Should the simple line be capped at 450 characters? A (Recommended): yes, so it fits one status row. B: no cap, the reviewer judges length. Reasoning: [below](#reasoning-for-aw-d11) | A | A cap is mechanical and checkable, but the number is a judgment and a rich gate may need splitting to fit |
-| `AW-D12` | **Question:** Where an older gate records no recommendation, may the author suggest one, and how is it shown? A (Recommended): yes, option A is marked as the author's suggestion on the line itself. B: yes, but only the reasoning says so and the line looks the same. C: no, the gate waits until the owner supplies a recommendation. Reasoning: [below](#reasoning-for-aw-d12) | A | Many older gates say "needs you" with no default, and the new shape needs one preferred option on the line |
+| `AW-D09` | **Question:** Must every gate carry the full reasoning, even a small one? **Suggested:** Yes | A | Skipping the reasoning for small gates is faster, but it makes "small" a judgment each author makes alone |
+| `AW-D10` | **Question:** May a reasoning line say it does not know a figure and what would settle it? **Suggested:** Yes | A | Requiring every cost and date unblocks nothing when the source does not hold them, and pressure to fill the gap produces invented figures |
+| `AW-D11` | **Question:** Should the suggested words name an option by its letter, by its name, or either? **Suggested:** Either | A | The owner's own examples use both, but a looser rule means a checker that has to reject a match that names two options |
+| `AW-D12` | **Question:** When the author, not the owner, made the suggestion, where should that be shown? **Suggested:** Reasoning and index | C | The one-line tier has no room to say whose the suggestion is, so the choice is between the full reasoning alone, nowhere, and the reasoning plus the index row the owner actually scans |
 
 ### Reasoning for AW-D09
 
-- **Context:** The rule asks for a plain answer and a full reasoning on every gate. Some gates are small, such as a name or a default, and a full section for them can feel like paperwork. The rule is new, so the habit has not formed either way.
+- **Context:** The rule asks for a plain question and a full reasoning on every gate. Some gates are small, such as a name or a default, and a full section for them can feel like paperwork. The rule is new, so the habit has not formed either way.
 - **Prerequisites:** None — the rule and its template exist, and a small gate can use them as they are.
 
-#### Option A (Recommended): every gate, one short line per part
+#### Option A: Yes (Suggested)
 
 - **What it is:** Every gate keeps all parts and all eight lines per option. A small gate answers each in one short line, and a line with truly nothing to add says `None —` and why.
 - **Unlocks:** One shape everywhere, so a reader and a checker never have to decide whether a gate was small enough to skip.
@@ -41,9 +41,9 @@ The `**Question:**` line and the A/B options already existed in the question tem
 - **Incompatible with:** Option B, and any checker that needs a size test to decide what to skip.
 - **Needs first:** None — the template and the rule already exist.
 
-#### Option B: only gates that change scope, security or anything public
+#### Option B: Only big gates
 
-- **What it is:** Gates outside those three kinds may keep a one-line question with no reasoning section.
+- **What it is:** Gates outside the big kinds (scope, security, anything public) may keep the question and the suggested answer with no reasoning section.
 - **Unlocks:** Less writing on trivial gates.
 - **Blocks:** A single rule for the generator and the reviewer: each now has to classify a gate first.
 - **Risks:** A gate that looked small turns out to matter and has no reasoning on record. Medium impact, and it is found only after the answer.
@@ -54,7 +54,7 @@ The `**Question:**` line and the A/B options already existed in the question tem
 
 #### Trade-offs
 
-| Axis | A (Recommended) | B |
+| Axis | A (Suggested) | B |
 |---|---|---|
 | Rules the checker applies | One | One plus a size test |
 | Writing for a trivial gate | Ten short lines | Almost none |
@@ -72,7 +72,7 @@ The `**Question:**` line and the A/B options already existed in the question tem
 - **Context:** The full reasoning asks every option for its effort and its money, and for effects on other work. Many older gates come from sources that never recorded a cost or a date. The rule has to say what a line does when the figure does not exist.
 - **Prerequisites:** None — the rule is wording only, and the generator accepts the form once projects adopt it.
 
-#### Option A (Recommended): allow Unknown, with what would settle it
+#### Option A: Yes (Suggested)
 
 - **What it is:** A line may read `Unknown —` followed by what would settle it, for example a quote or a measurement. A bare `unknown` is not accepted.
 - **Unlocks:** Gates can be finished and asked now, with the gap shown honestly rather than guessed.
@@ -83,7 +83,7 @@ The `**Question:**` line and the A/B options already existed in the question tem
 - **Incompatible with:** Option B.
 - **Needs first:** The reviewer check in the drive and review workflow, which this change adds.
 
-#### Option B: no, the gate waits until every figure is found
+#### Option B: No
 
 - **What it is:** A gate may not be presented until every cost, date and effect has a source.
 - **Unlocks:** Complete figures on every gate that does get presented.
@@ -96,7 +96,7 @@ The `**Question:**` line and the A/B options already existed in the question tem
 
 #### Trade-offs
 
-| Axis | A (Recommended) | B |
+| Axis | A (Suggested) | B |
 |---|---|---|
 | Honesty of the figures | Gaps are shown | Complete or absent, pressure to guess |
 | Gates that can be asked now | All | Only those with every figure |
@@ -111,98 +111,109 @@ The `**Question:**` line and the A/B options already existed in the question tem
 
 ### Reasoning for AW-D11
 
-- **Context:** The simple line has to fit one row of a status view or an index. The owner asked for it to be short enough for a dashboard row but gave no number. The index currently shortens long cells, which can cut an option in half.
-- **Prerequisites:** None — the cap is a number the generator reads.
+- **Context:** The suggested answer is one to three words and names the recommended choice. The owner's examples point at options in two ways: by letter (`Option B`) and by name (`Yes`, `Keep private`, `Force-push`, `90-day re-check`). The checker needs one rule for how the words find their option.
+- **Prerequisites:** None — option names are already one to three words, so either way can be checked.
 
-#### Option A (Recommended): cap at 450 characters
+#### Option A: Either (Suggested)
 
-- **What it is:** The simple line, not counting its pointer, may be at most 450 characters. A longer line is rejected and the gate is shortened or split.
-- **Unlocks:** A line that always fits one row, so an index never cuts an option, and a limit a machine can check.
-- **Blocks:** Long conditions on the line, which move to the reasoning.
-- **Risks:** A rich gate is squeezed until its options turn vague. Low impact, because the reviewer's check that the line can be answered alone catches it, and the remedy is to split the gate.
-- **Effort:** About two minutes to trim a line (estimate).
-- **Money:** None — a number in a check, no new service.
-- **Incompatible with:** Option B.
-- **Needs first:** None — the generator reads the number.
+- **What it is:** The suggested words are either `Option` and a letter, or exactly one option's name. A match that fits two options is rejected.
+- **Unlocks:** Every one of the owner's examples works, and a yes or no gate can simply say `Yes`.
+- **Blocks:** None — it rules nothing out.
+- **Risks:** An option named like another option's letter, for example one called `Option B`, would be ambiguous. Low impact, because the checker rejects an ambiguous match.
+- **Effort:** One rule in the checker and its tests (estimate: an hour).
+- **Money:** None — a rule in a script, no new service.
+- **Incompatible with:** Options B and C.
+- **Needs first:** None — the options are already named.
 
-#### Option B: no cap, the reviewer judges length
+#### Option B: Name only
 
-- **What it is:** No number. The reviewer decides whether a line is short enough.
-- **Unlocks:** Lines with fuller options.
-- **Blocks:** A mechanical length check, and a guaranteed fit in a one-row view.
-- **Risks:** Lines grow until the owner has to read them closely, which defeats the first tier. Medium impact, and it builds up gradually.
-- **Effort:** None — no change to the generator is needed.
-- **Money:** None — nothing is built.
-- **Incompatible with:** Option A, and any index that shows the full line without shortening.
-- **Needs first:** None — nothing needs to change.
+- **What it is:** The suggested words must be exactly an option's name; a bare letter is not accepted.
+- **Unlocks:** A suggested answer that reads well without the section open.
+- **Blocks:** `Option B`, one of the owner's own examples.
+- **Risks:** An author who wants to point at a letter must invent a name for it, which is noise.
+- **Effort:** One rule in the checker and its tests (estimate: an hour).
+- **Money:** None — a rule in a script, no new service.
+- **Incompatible with:** Option A, and the owner's example `Option B`.
+- **Needs first:** None — the options are already named.
+
+#### Option C: Letter only
+
+- **What it is:** The suggested words must be `Option` and a letter; names are not accepted.
+- **Unlocks:** An unambiguous match every time.
+- **Blocks:** `Yes`, `Keep private` and the other named examples.
+- **Risks:** A suggested answer that says nothing without the section open, which defeats the one-row tier. Medium impact.
+- **Effort:** One rule in the checker and its tests (estimate: an hour).
+- **Money:** None — a rule in a script, no new service.
+- **Incompatible with:** Options A and B, and the owner's named examples.
+- **Needs first:** None — the options are already lettered.
 
 #### Trade-offs
 
-| Axis | A (Recommended) | B |
-|---|---|---|
-| Fits one status row | Always | Not guaranteed |
-| Checked by a machine | Yes | No |
-| Room for detail on the line | Little, so detail goes to the reasoning | More |
-| Risk of a vague option from squeezing | Some, caught in review | None |
+| Axis | A (Suggested) | B | C |
+|---|---|---|---|
+| Owner's examples accepted | All | Names only | `Option B` only |
+| Reads well in one row | Yes | Yes | No |
+| Ambiguity to reject | A name equal to another letter label | None | None |
 
 - **Downstream impact:**
-  - **Changes:** With A, the generator rejects longer lines in new gates and the index shows the whole line. With B, neither changes.
-  - **Unblocks:** Neither answer blocks anything.
-- **Cost of deferring:** The default applies, so new gates are held to 450 characters now. Older gates are not affected.
-- **Worst case:** A is chosen and a good gate is rejected for being twenty characters over. It shows up as a failed check, and trimming or splitting fixes it in minutes.
+  - **Changes:** With A, the checker resolves a suggestion by letter or by name. With B or C it resolves by one of them, and the owner's other examples fail.
+  - **Unblocks:** Any answer unblocks the checker and the back-fill; A matches the examples already given.
+- **Cost of deferring:** The default applies, so the checker accepts either. If the answer is B or C, gates written with the other form are rewritten.
+- **Worst case:** A is chosen and an author writes a name that happens to equal another option's label; the checker rejects it and the author renames the option.
 
 ### Reasoning for AW-D12
 
-- **Context:** The preferred option on the simple line should be the owner's or the source's own recommendation. Many older gates record none: they say "needs you" and ask for a name, a machine or a choice only the owner can make. The rule needs one preferred option on every line so the owner can answer in one word, and the owner reads the line first and may never open the reasoning. So the rule needs an answer for these gates.
-- **Prerequisites:** None — the mark is one word on the line, and the checks for it are part of this change.
+- **Context:** A suggestion should be the owner's or the source's own recommendation. Many older gates record none: they say "needs you" and ask for something only the owner can supply, so the suggestion is the author's own guess. The one-line tier has no room to say whose the suggestion is. That leaves the full reasoning, which the owner opens only when unsure, and the index row, which is what the owner scans.
+- **Prerequisites:** None — the Context line already exists in every gate, and the index already has a column for the recommendation.
 
-#### Option A (Recommended): mark it on the line
+#### Option A: Reasoning only
 
-- **What it is:** Where the source records no recommendation, option A is written `A (Suggested):` instead of `A (Recommended):`, with the same mark in the Option A heading and in the Trade-offs header, and the Context line says the source records no recommendation and A is the author's suggestion.
-- **Unlocks:** Every older gate can be put in the shape and answered in one word, and the owner can tell from the line alone whether A is a recommendation the owner or the source made or only a suggestion.
-- **Blocks:** An index or report that shows both marks the same way, which is the point.
-- **Risks:** A reader sees Suggested and treats the gate as less settled than it is. Low impact, and that is the honest reading.
-- **Effort:** One word on the line, the matching marks and one Context sentence for each such gate (estimate: a few minutes each).
+- **What it is:** Where the source records no recommendation, the Context line says so and that the suggestion is the author's. The index shows the suggested words the same way for every gate.
+- **Unlocks:** A reader of the section can tell a standing recommendation from a fresh author's guess, with no change to how an index is built.
+- **Blocks:** A reader of the index row alone cannot tell the two apart.
+- **Risks:** An owner who scans only the index takes an author's guess for a recorded position. Medium impact, and it is found only after the answer.
+- **Effort:** One sentence of Context for each such gate; the reviewer confirms it (estimate: a minute each).
 - **Money:** None — wording only, no new service.
-- **Incompatible with:** Options B and C.
-- **Needs first:** None — the checker in the same change already enforces the marks.
+- **Incompatible with:** Options B and C, which are the other answers to the same question.
+- **Needs first:** None — the review check already asks the reviewer to confirm whose the suggestion is.
 
-#### Option B: say so only in the reasoning
+#### Option B: Nowhere
 
-- **What it is:** The line keeps `A (Recommended)` for every gate, and only the Context line says that A is the author's suggestion.
-- **Unlocks:** One mark everywhere, so no checker or index has to tell two marks apart.
-- **Blocks:** Telling a suggestion from a recommendation without opening the reasoning.
-- **Risks:** The owner decides from the line alone, takes the suggestion for a recommendation that the owner or the source made, and the index shows it as a standing default. Medium impact, and it is found only after the answer.
-- **Effort:** One Context sentence for each such gate (estimate: a few minutes each).
-- **Money:** None — wording only, no new service.
-- **Incompatible with:** Option A, and the owner's requirement to decide from the simple line alone.
-- **Needs first:** None — it is the policy's earlier wording.
+- **What it is:** Nothing says whose the suggestion is; a gate is simply suggested.
+- **Unlocks:** Less writing, and one fewer check.
+- **Blocks:** Telling a recommendation the source records from an author's guess, in the section or in the index.
+- **Risks:** The owner takes an author's guess for a position the source already holds, and the index shows it as a standing recommendation. Medium impact, found only after the answer.
+- **Effort:** None — nothing to write.
+- **Money:** None — nothing changes.
+- **Incompatible with:** Options A and C, and a reviewer check that the suggestion is the owner's or the source's.
+- **Needs first:** None — it removes a rule.
 
-#### Option C: no author suggestions
+#### Option C: Reasoning and index (Suggested)
 
-- **What it is:** A gate whose source records no recommendation stays out of the new shape until the owner writes a recommendation for it.
-- **Unlocks:** Every recommendation the owner sees is one the owner or the source already holds.
-- **Blocks:** Back-filling those gates, and asking them in a status report, until the owner supplies a recommendation.
-- **Risks:** The owner must write a recommendation before being able to answer, so the rule meant to speed up answers slows the hardest ones. Medium impact.
-- **Effort:** One owner pass over each such gate (estimate: a few minutes each).
-- **Money:** None — no new service.
-- **Incompatible with:** Options A and B, and back-filling every older gate in one pass.
-- **Needs first:** The owner's time to write a recommendation for each such gate.
+- **What it is:** The Context line says it, as in A. The index's recommendation column also shows `None recorded; the author suggests: <words>` for those gates, instead of showing the suggestion as if it were recorded.
+- **Unlocks:** The row the owner scans and the section agree: an author's guess is marked as one where it is read first.
+- **Blocks:** None — the one-line tier stays a question and a suggestion; only the text the index shows beside it changes.
+- **Risks:** An index that cannot tell a table with no recommendation column from one that records its recommendation under another heading marks a real recommendation as the author's. Low impact, and it shows up as a failing check on that table, fixed by naming the heading.
+- **Effort:** One sentence of Context per gate, as in A, plus a one-time change to an index generator; the first index generator to adopt the rule already does it (estimate: an hour, with tests).
+- **Money:** None — wording and code only.
+- **Incompatible with:** Options A and B, which are the other answers to the same question.
+- **Needs first:** An index generator that reads a table's recommendation column, which the first adopting generator already does.
 
 #### Trade-offs
 
-| Axis | A (Recommended) | B | C |
+| Axis | A | B | C (Suggested) |
 |---|---|---|---|
-| Owner can tell a suggestion from a recommendation on the line | Yes | No | Not applicable, none is shown |
-| Gates that can be asked now | All of them | All of them | Only those that already have a recommendation |
-| Marks the checks and the index must handle | Two | One | One |
-| Owner effort before a gate can be asked | None | None | A pass over each such gate |
+| Owner can tell whose the suggestion is in the section | Yes | No | Yes |
+| Owner can tell whose the suggestion is in the index row | No | No | Yes |
+| Writing per gate with no recorded recommendation | One sentence | None | One sentence |
+| Checks an index generator runs | One, on the Context | None | Two, the Context and the text beside the suggestion |
+| Chance an author's guess is taken for a standing recommendation | Real, in the index | Real | Low |
 
 - **Downstream impact:**
-  - **Changes:** With A, the generator accepts the Suggested mark on A, checks it against the row's own default and shows the suggestion apart from a default; with B, only the Context wording and the review check change; with C, back-fills list the gates they cannot finish.
-  - **Unblocks:** A and B unblock back-filling the gates that record no recommendation, in every project; A also keeps the line honest.
-- **Cost of deferring:** The default applies, so authors write Suggested now. If the answer is B or C, the marks are changed back or the gates are listed as waiting on the owner.
-- **Worst case:** A is chosen and the owner would rather see no suggestions at all, so some gates carry one they do not want. It shows on the line and in the index, and removing a suggestion is a one-word change for each gate.
+  - **Changes:** With C, the policy says the index marks such a suggestion as the author's, and the first adopting generator already requires the Context to name the author and renders the marked text. With A, the index text is removed from the generator. With B, the Context check goes too.
+  - **Unblocks:** Any answer unblocks the back-fill of gates that record no recommendation.
+- **Cost of deferring:** The default applies, so authors write the sentence and the index marks the suggestion. If the answer is A or B, the index text is removed in one small change and the sentences already written are harmless.
+- **Worst case:** C is chosen and the owner finds the marked text noisy; it is one text pattern in a generator and one sentence per gate, and removing it is one small change.
 
 ## Rollout and rollback
 
